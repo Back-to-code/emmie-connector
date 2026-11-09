@@ -1,23 +1,25 @@
 <?php
 /*
- * Plugin Name: WP Emmie Plugin
- * Description: Shares client data from your Wordpress site to Emmie
- * Version: 1.3.0
- * Author: Script
- * Author URI:  https://emmie.nl
- * Text Domain: wp-emmie-plugin
- * Domain Path: /languages
+ * Plugin Name:       Emmie Connector
+ * Description:       Connects your website to Emmie: an intake form that adds a new client to your Emmie, and Emmie's booking form for introductory meetings.
+ * Version:           1.4.0
+ * Requires at least: 6.3
+ * Requires PHP:      8.0
+ * Author:            Emmie B.V.
+ * Author URI:        https://emmie.nl
+ * License:           GPLv2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       emmie-connector
+ * Domain Path:       /languages
  */
 
-\defined('ABSPATH') || exit(__('Something went wrong', 'wp-emmie-plugin'));
+\defined('ABSPATH') || exit;
 
 require_once plugin_dir_path(__FILE__) . 'functions.php';
 require_once plugin_dir_path(__FILE__) . 'admin-settings.php';
 require_once plugin_dir_path(__FILE__) . 'form-handler.php';
 require_once plugin_dir_path(__FILE__) . 'booking-form.php';
-require_once plugin_dir_path(__FILE__) . 'fsd-data-encryption.php';
-
-add_action('user_register', 'wp2emmie_send_user_data', 10, 1);
+require_once plugin_dir_path(__FILE__) . 'class-wp2emmie-data-encryption.php';
 
 register_activation_hook(__FILE__, 'wp2emmie_activate_plugin');
 
@@ -44,7 +46,7 @@ add_filter('plugin_action_links_' . plugin_basename(__FILE__), function($links) 
     // Add a data attribute we’ll hook with JS
     $deactivate_link = admin_url('plugins.php?action=deactivate&plugin=' . plugin_basename(__FILE__) . '&plugin_status=all&paged=1&_wpnonce=' . wp_create_nonce('deactivate-plugin_' . plugin_basename(__FILE__)));
 
-    $custom = '<a href="#" class="wp2emmie-deactivate" data-deactivate-url="' . esc_url($deactivate_link) . '">' . __('Deactivate', 'wp-emmie-plugin') . ' </a>';
+    $custom = '<a href="#" class="wp2emmie-deactivate" data-deactivate-url="' . esc_url($deactivate_link) . '">' . __('Deactivate', 'emmie-connector') . ' </a>';
     $links['deactivate'] = $custom;
 
     return $links;
@@ -58,7 +60,7 @@ add_action('admin_footer-plugins.php', function(): void {
                 el.addEventListener('click', function(e) {
                     e.preventDefault();
                     const deactivateUrl = el.dataset.deactivateUrl;
-                    const confirmed = confirm(<?= wp_json_encode(__('Do you want to delete all WP to emmie Connector settings and data?', 'wp-emmie-plugin')); ?>);
+                    const confirmed = confirm(<?= wp_json_encode(__('Do you want to delete all Emmie Connector settings and data?', 'emmie-connector')); ?>);
 
                     if (confirmed) {
                         window.location.href = deactivateUrl + '&wp2emmie_delete=1';
@@ -107,9 +109,9 @@ add_action('admin_init', function(): void {
     }
 });
 
-add_action('plugins_loaded', 'wp_emmie_plugin_load_textdomain');
+add_action('plugins_loaded', 'wp2emmie_load_textdomain');
 
-function wp_emmie_plugin_load_textdomain(): void
+function wp2emmie_load_textdomain(): void
 {
-    load_plugin_textdomain('wp-emmie-plugin', false, \dirname(plugin_basename(__FILE__)) . '/languages/');
+    load_plugin_textdomain('emmie-connector', false, \dirname(plugin_basename(__FILE__)) . '/languages/');
 }

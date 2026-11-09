@@ -15,17 +15,17 @@ function wp2emmie_get_intake_options(): ?array
         return $cached;
     }
 
-    $api_url = get_option('wp2emmie_api_url');
+    $emmie_origin = wp2emmie_emmie_origin();
     $api_token_encrypted = get_option('wp2emmie_api_token');
 
-    if (!$api_url || !$api_token_encrypted) {
+    if ($emmie_origin === '' || !$api_token_encrypted) {
         return null;
     }
 
-    $encryption = new FSD_Data_Encryption;
+    $encryption = new WP2Emmie_Data_Encryption;
     $api_token = $encryption->decrypt($api_token_encrypted);
 
-    $response = wp_remote_get($api_url . '/api/intake/options', [
+    $response = wp_remote_get($emmie_origin . '/api/intake/options', [
         'headers' => [
             'X-API-KEY' => $api_token,
             'Accept' => 'application/json',
@@ -50,7 +50,7 @@ function wp2emmie_render_form(): false|string
 
     // If token is invalid or not set, disable form
     if (!$token_valid) {
-        return '<div style="color: red; font-weight: bold;"> ' . __('The form is not available', 'wp-emmie-plugin') . '</div>';
+        return '<div style="color: red; font-weight: bold;"> ' . __('The form is not available', 'emmie-connector') . '</div>';
     }
 
     $options = wp2emmie_get_intake_options();
@@ -106,7 +106,7 @@ function wp2emmie_render_form(): false|string
 
         <!-- Required fields -->
         <p>
-            <label for="client_first_name" class="required"><?php _e('First Name', 'wp-emmie-plugin'); ?></label><br>
+            <label for="client_first_name" class="required"><?php _e('First Name', 'emmie-connector'); ?></label><br>
             <input type="text" name="client_first_name" class="<?= isset($errors['client_first_name']) ? 'wp2emmie-field-error' : ''; ?>" value="<?= !$submission_success && isset($_POST['client_first_name']) ? esc_attr((string) $_POST['client_first_name']) : ''; ?>" required>
             <?php if (isset($errors['client_first_name'])) { ?>
                 <span class="wp2emmie-error-text"><?= esc_html((string) $errors['client_first_name']); ?></span>
@@ -115,7 +115,7 @@ function wp2emmie_render_form(): false|string
         <br>
 
         <p>
-            <label for="client_last_name" class="required"><?php _e('Last Name', 'wp-emmie-plugin'); ?></label><br>
+            <label for="client_last_name" class="required"><?php _e('Last Name', 'emmie-connector'); ?></label><br>
             <input type="text" name="client_last_name" class="<?= isset($errors['client_last_name']) ? 'wp2emmie-field-error' : ''; ?>" value="<?= !$submission_success && isset($_POST['client_last_name']) ? esc_attr((string) $_POST['client_last_name']) : ''; ?>" required>
             <?php if (isset($errors['client_last_name'])) { ?>
                 <span class="wp2emmie-error-text"><?= esc_html((string) $errors['client_last_name']); ?></span>
@@ -124,7 +124,7 @@ function wp2emmie_render_form(): false|string
         <br>
 
         <p>
-            <label for="client_email" class="required"><?php _e('Email Address', 'wp-emmie-plugin'); ?></label><br>
+            <label for="client_email" class="required"><?php _e('Email Address', 'emmie-connector'); ?></label><br>
             <input type="email" name="client_email" class="<?= isset($errors['client_email']) ? 'wp2emmie-field-error' : ''; ?>" value="<?= !$submission_success && isset($_POST['client_email']) ? esc_attr((string) $_POST['client_email']) : ''; ?>" required>
             <?php if (isset($errors['client_email'])) { ?>
                 <span class="wp2emmie-error-text"><?= esc_html((string) $errors['client_email']); ?></span>
@@ -133,7 +133,7 @@ function wp2emmie_render_form(): false|string
         <br>
 
         <p>
-            <label for="client_phone_number" class="required"><?php _e('Telephone Number', 'wp-emmie-plugin'); ?></label><br>
+            <label for="client_phone_number" class="required"><?php _e('Telephone Number', 'emmie-connector'); ?></label><br>
             <input type="text" name="client_phone_number" class="<?= isset($errors['client_phone_number']) ? 'wp2emmie-field-error' : ''; ?>" value="<?= !$submission_success && isset($_POST['client_phone_number']) ? esc_attr((string) $_POST['client_phone_number']) : ''; ?>">
             <?php if (isset($errors['client_phone_number'])) { ?>
                 <span class="wp2emmie-error-text"><?= esc_html((string) $errors['client_phone_number']); ?></span>
@@ -144,23 +144,23 @@ function wp2emmie_render_form(): false|string
         <!-- Address fields -->
         <div class="wp2emmie-section">
             <p>
-                <label for="client_street"><?php _e('Street', 'wp-emmie-plugin'); ?></label><br>
+                <label for="client_street"><?php _e('Street', 'emmie-connector'); ?></label><br>
                 <input type="text" name="client_street" value="<?= !$submission_success && isset($_POST['client_street']) ? esc_attr((string) $_POST['client_street']) : ''; ?>">
             </p>
             <p>
-                <label for="client_number"><?php _e('House Number', 'wp-emmie-plugin'); ?></label><br>
+                <label for="client_number"><?php _e('House Number', 'emmie-connector'); ?></label><br>
                 <input type="number" name="client_number" value="<?= !$submission_success && isset($_POST['client_number']) ? esc_attr((string) $_POST['client_number']) : ''; ?>">
             </p>
             <p>
-                <label for="client_number_addition"><?php _e('Addition', 'wp-emmie-plugin'); ?></label><br>
+                <label for="client_number_addition"><?php _e('Addition', 'emmie-connector'); ?></label><br>
                 <input type="text" name="client_number_addition" value="<?= !$submission_success && isset($_POST['client_number_addition']) ? esc_attr((string) $_POST['client_number_addition']) : ''; ?>">
             </p>
             <p>
-                <label for="client_zipcode"><?php _e('Zipcode', 'wp-emmie-plugin'); ?></label><br>
+                <label for="client_zipcode"><?php _e('Zipcode', 'emmie-connector'); ?></label><br>
                 <input type="text" name="client_zipcode" value="<?= !$submission_success && isset($_POST['client_zipcode']) ? esc_attr((string) $_POST['client_zipcode']) : ''; ?>">
             </p>
             <p>
-                <label for="client_city"><?php _e('City', 'wp-emmie-plugin'); ?></label><br>
+                <label for="client_city"><?php _e('City', 'emmie-connector'); ?></label><br>
                 <input type="text" name="client_city" value="<?= !$submission_success && isset($_POST['client_city']) ? esc_attr((string) $_POST['client_city']) : ''; ?>">
             </p>
         </div>
@@ -168,9 +168,9 @@ function wp2emmie_render_form(): false|string
         <!-- Location dropdown -->
         <?php if (!empty($options['locations'])) { ?>
         <p>
-            <label for="client_location_id" class="required"><?php _e('Which location are you interested in?', 'wp-emmie-plugin'); ?></label><br>
+            <label for="client_location_id" class="required"><?php _e('Which location are you interested in?', 'emmie-connector'); ?></label><br>
             <select name="client_location_id" required class="<?= isset($errors['client_location_id']) ? 'wp2emmie-field-error' : ''; ?>">
-                <option value=""><?php _e('Select a location', 'wp-emmie-plugin'); ?></option>
+                <option value=""><?php _e('Select a location', 'emmie-connector'); ?></option>
                 <?php foreach ($options['locations'] as $location) { ?>
                     <option value="<?= esc_attr((string) $location['id']); ?>" <?= (!$submission_success && isset($_POST['client_location_id']) && $_POST['client_location_id'] === $location['id']) ? 'selected' : ''; ?>>
                         <?= esc_html((string) $location['name']); ?>
@@ -187,9 +187,9 @@ function wp2emmie_render_form(): false|string
         <!-- Income situation dropdown -->
         <?php if (!empty($options['income_situations'])) { ?>
         <p>
-            <label for="client_income_situation"><?php _e('Income Situation', 'wp-emmie-plugin'); ?></label><br>
+            <label for="client_income_situation"><?php _e('Income Situation', 'emmie-connector'); ?></label><br>
             <select name="client_income_situation">
-                <option value=""><?php _e('Select income situation', 'wp-emmie-plugin'); ?></option>
+                <option value=""><?php _e('Select income situation', 'emmie-connector'); ?></option>
                 <?php foreach ($options['income_situations'] as $situation) { ?>
                     <option value="<?= esc_attr((string) $situation['id']); ?>" <?= (!$submission_success && isset($_POST['client_income_situation']) && $_POST['client_income_situation'] === $situation['id']) ? 'selected' : ''; ?>>
                         <?= esc_html((string) $situation['name']); ?>
@@ -203,9 +203,9 @@ function wp2emmie_render_form(): false|string
         <!-- Contact preference dropdown -->
         <?php if (!empty($options['contact_preferences'])) { ?>
         <p>
-            <label for="client_contact_preference_id"><?php _e('Contact Preference', 'wp-emmie-plugin'); ?></label><br>
+            <label for="client_contact_preference_id"><?php _e('Contact Preference', 'emmie-connector'); ?></label><br>
             <select name="client_contact_preference_id">
-                <option value=""><?php _e('Select contact preference', 'wp-emmie-plugin'); ?></option>
+                <option value=""><?php _e('Select contact preference', 'emmie-connector'); ?></option>
                 <?php foreach ($options['contact_preferences'] as $preference) { ?>
                     <option value="<?= esc_attr((string) $preference['id']); ?>" <?= (!$submission_success && isset($_POST['client_contact_preference_id']) && $_POST['client_contact_preference_id'] === $preference['id']) ? 'selected' : ''; ?>>
                         <?= esc_html((string) $preference['name']); ?>
@@ -221,34 +221,34 @@ function wp2emmie_render_form(): false|string
             <p>
                 <label>
                     <input type="checkbox" id="wp2emmie-has-contact" name="has_contact_person" <?= (!$submission_success && isset($_POST['has_contact_person'])) ? 'checked' : ''; ?>>
-                    <?php _e('Add contact person', 'wp-emmie-plugin'); ?>
+                    <?php _e('Add contact person', 'emmie-connector'); ?>
                 </label>
             </p>
             <div class="wp2emmie-contact-fields" id="wp2emmie-contact-fields">
                 <p>
-                    <label for="contact_first_name"><?php _e('Contact First Name', 'wp-emmie-plugin'); ?></label><br>
+                    <label for="contact_first_name"><?php _e('Contact First Name', 'emmie-connector'); ?></label><br>
                     <input type="text" name="contact_first_name" value="<?= !$submission_success && isset($_POST['contact_first_name']) ? esc_attr((string) $_POST['contact_first_name']) : ''; ?>">
                 </p>
                 <p>
-                    <label for="contact_last_name"><?php _e('Contact Last Name', 'wp-emmie-plugin'); ?></label><br>
+                    <label for="contact_last_name"><?php _e('Contact Last Name', 'emmie-connector'); ?></label><br>
                     <input type="text" name="contact_last_name" value="<?= !$submission_success && isset($_POST['contact_last_name']) ? esc_attr((string) $_POST['contact_last_name']) : ''; ?>">
                 </p>
                 <p>
-                    <label for="contact_organisation"><?php _e('Organisation', 'wp-emmie-plugin'); ?></label><br>
+                    <label for="contact_organisation"><?php _e('Organisation', 'emmie-connector'); ?></label><br>
                     <input type="text" name="contact_organisation" value="<?= !$submission_success && isset($_POST['contact_organisation']) ? esc_attr((string) $_POST['contact_organisation']) : ''; ?>">
                 </p>
                 <p>
-                    <label for="contact_email"><?php _e('Contact Email', 'wp-emmie-plugin'); ?></label><br>
+                    <label for="contact_email"><?php _e('Contact Email', 'emmie-connector'); ?></label><br>
                     <input type="email" name="contact_email" value="<?= !$submission_success && isset($_POST['contact_email']) ? esc_attr((string) $_POST['contact_email']) : ''; ?>">
                 </p>
                 <p>
-                    <label for="contact_phone_number"><?php _e('Contact Phone Number', 'wp-emmie-plugin'); ?></label><br>
+                    <label for="contact_phone_number"><?php _e('Contact Phone Number', 'emmie-connector'); ?></label><br>
                     <input type="text" name="contact_phone_number" value="<?= !$submission_success && isset($_POST['contact_phone_number']) ? esc_attr((string) $_POST['contact_phone_number']) : ''; ?>">
                 </p>
                 <p>
                     <label>
                         <input type="checkbox" name="contact_may_contact_before_intake" value="1" <?= (!$submission_success && isset($_POST['contact_may_contact_before_intake'])) ? 'checked' : ''; ?>>
-                        <?php _e('The organisation may contact this person before the first meeting', 'wp-emmie-plugin'); ?>
+                        <?php _e('The organisation may contact this person before the first meeting', 'emmie-connector'); ?>
                     </label>
                 </p>
             </div>
@@ -258,9 +258,9 @@ function wp2emmie_render_form(): false|string
         <!-- Referral source dropdown -->
         <?php if (!empty($options['referral_sources'])) { ?>
         <p>
-            <label for="client_referral_source"><?php _e('How did you find us?', 'wp-emmie-plugin'); ?></label><br>
+            <label for="client_referral_source"><?php _e('How did you find us?', 'emmie-connector'); ?></label><br>
             <select name="client_referral_source" id="wp2emmie-referral-source">
-                <option value=""><?php _e('Select an option', 'wp-emmie-plugin'); ?></option>
+                <option value=""><?php _e('Select an option', 'emmie-connector'); ?></option>
                 <?php foreach ($options['referral_sources'] as $source) { ?>
                     <option value="<?= esc_attr((string) $source['name']); ?>" <?= (!$submission_success && isset($_POST['client_referral_source']) && $_POST['client_referral_source'] === $source['name']) ? 'selected' : ''; ?>>
                         <?= esc_html((string) $source['name']); ?>
@@ -269,7 +269,7 @@ function wp2emmie_render_form(): false|string
             </select>
             <span class="wp2emmie-referral-other" id="wp2emmie-referral-other">
                 <br>
-                <input type="text" name="client_referral_source_other" placeholder="<?php _e('Please specify', 'wp-emmie-plugin'); ?>" value="<?= !$submission_success && isset($_POST['client_referral_source_other']) ? esc_attr((string) $_POST['client_referral_source_other']) : ''; ?>">
+                <input type="text" name="client_referral_source_other" placeholder="<?php _e('Please specify', 'emmie-connector'); ?>" value="<?= !$submission_success && isset($_POST['client_referral_source_other']) ? esc_attr((string) $_POST['client_referral_source_other']) : ''; ?>">
             </span>
         </p>
         <br>
@@ -277,15 +277,15 @@ function wp2emmie_render_form(): false|string
 
         <!-- File upload -->
         <p>
-            <label for="documents"><?php _e('Documents', 'wp-emmie-plugin'); ?></label><br>
+            <label for="documents"><?php _e('Documents', 'emmie-connector'); ?></label><br>
             <input type="file" name="documents[]" multiple accept=".doc,.docx,.rtf,.xls,.xlsx,.txt,.jpg,.jpeg,.png,.pdf">
-            <small><?php _e('Allowed formats: doc, docx, rtf, xls, xlsx, txt, jpg, jpeg, png, pdf. Max 40MB per file.', 'wp-emmie-plugin'); ?></small>
+            <small><?php _e('Allowed formats: doc, docx, rtf, xls, xlsx, txt, jpg, jpeg, png, pdf. Max 40MB per file.', 'emmie-connector'); ?></small>
         </p>
         <br>
 
         <!-- Comment -->
         <p>
-            <label for="client_comment"><?php _e('Comments', 'wp-emmie-plugin'); ?></label><br>
+            <label for="client_comment"><?php _e('Comments', 'emmie-connector'); ?></label><br>
             <textarea name="client_comment" rows="4" cols="50" class="<?= isset($errors['client_comment']) ? 'wp2emmie-field-error' : ''; ?>"><?= !$submission_success && isset($_POST['client_comment']) ? esc_textarea((string) $_POST['client_comment']) : ''; ?></textarea>
             <?php if (isset($errors['client_comment'])) { ?>
                 <span class="wp2emmie-error-text"><?= esc_html((string) $errors['client_comment']); ?></span>
@@ -294,14 +294,14 @@ function wp2emmie_render_form(): false|string
         <br>
 
         <p>
-            <label for="privacy_checkbox" class="required"><?php _e('Personal Data', 'wp-emmie-plugin'); ?></label><br>
+            <label for="privacy_checkbox" class="required"><?php _e('Personal Data', 'emmie-connector'); ?></label><br>
             <input type="checkbox" name="privacy_checkbox" id="privacy_checkbox" <?= !$submission_success && (isset($_POST['privacy_checkbox']) && $_POST['privacy_checkbox'] === 'on') ? 'checked' : ''; ?>> <br>
             <?php if (isset($errors['privacy_checkbox'])) { ?>
                 <span class="wp2emmie-error-text"><?= esc_html((string) $errors['privacy_checkbox']); ?></span>
             <?php } ?>
             <?= \sprintf(
                 // translators: %s: the address of the privacy statement
-                __('By checking this box, you agree to the processing of your personal data according to the <a href="%s" target="_blank">privacy statement</a>', 'wp-emmie-plugin'),
+                __('By checking this box, you agree to the processing of your personal data according to the <a href="%s" target="_blank">privacy statement</a>', 'emmie-connector'),
                 esc_url(wp2emmie_privacy_policy_url()),
             ); ?>
         </p>
@@ -319,7 +319,7 @@ function wp2emmie_render_form(): false|string
                     data-sitekey="<?= esc_attr($site_key); ?>"
                     data-callback="onSubmit"
                     data-action="submit">
-                    <?php _e('Submit', 'wp-emmie-plugin'); ?>
+                    <?php _e('Submit', 'emmie-connector'); ?>
                 </button>
                 <?php if (isset($errors['recaptcha'])) { ?>
                     <span class="wp2emmie-error-text"><?= esc_html((string) $errors['recaptcha']); ?></span>
@@ -327,7 +327,7 @@ function wp2emmie_render_form(): false|string
             </p>
         <?php } else { ?>
             <p>
-                <button type="submit"><?php _e('Submit', 'wp-emmie-plugin'); ?></button>
+                <button type="submit"><?php _e('Submit', 'emmie-connector'); ?></button>
             </p>
         <?php } ?>
     </form>
@@ -364,7 +364,7 @@ function wp2emmie_render_form(): false|string
         }
 
     if ($submission_success) {
-        echo '<p><a class="wp2emmie-booking-button button" href="' . esc_url(wp2emmie_booking_page_url()) . '">' . esc_html__('Plan an introductory meeting', 'wp-emmie-plugin') . '</a></p>';
+        echo '<p><a class="wp2emmie-booking-button button" href="' . esc_url(wp2emmie_booking_page_url()) . '">' . esc_html__('Plan an introductory meeting', 'emmie-connector') . '</a></p>';
     }
 
     return ob_get_clean();
@@ -378,13 +378,13 @@ function wp2emmie_process_form(): array
     ) {
         return [
             'success' => false,
-            'message' => '<div style="color: red; font-weight: bold;">' . __('Security check failed. Please reload the page and try again.', 'wp-emmie-plugin') . '</div>',
+            'message' => '<div style="color: red; font-weight: bold;">' . __('Security check failed. Please reload the page and try again.', 'emmie-connector') . '</div>',
         ];
     }
 
     $errors = [];
     if (!isset($_POST['privacy_checkbox']) || $_POST['privacy_checkbox'] !== 'on') {
-        $errors['privacy_checkbox'] = __('You must agree to share the submitted personal data', 'wp-emmie-plugin');
+        $errors['privacy_checkbox'] = __('You must agree to share the submitted personal data', 'emmie-connector');
     }
 
     // Required fields
@@ -395,21 +395,21 @@ function wp2emmie_process_form(): array
     $comment = sanitize_textarea_field($_POST['client_comment'] ?? '');
 
     if ($first_name === '') {
-        $errors['client_first_name'] = __('First Name is required', 'wp-emmie-plugin');
+        $errors['client_first_name'] = __('First Name is required', 'emmie-connector');
     }
     if ($last_name === '') {
-        $errors['client_last_name'] = __('Last Name is required', 'wp-emmie-plugin');
+        $errors['client_last_name'] = __('Last Name is required', 'emmie-connector');
     }
     if ($email === '' || !is_email($email)) {
-        $errors['client_email'] = __('Please enter a valid email address', 'wp-emmie-plugin');
+        $errors['client_email'] = __('Please enter a valid email address', 'emmie-connector');
     }
     if ($phone_number === '') {
-        $errors['client_phone_number'] = __('Please enter a valid phone number', 'wp-emmie-plugin');
+        $errors['client_phone_number'] = __('Please enter a valid phone number', 'emmie-connector');
     }
 
     $location_id = $_POST['client_location_id'] ?? '';
     if ($location_id === '') {
-        $errors['client_location_id'] = __('Location is required', 'wp-emmie-plugin');
+        $errors['client_location_id'] = __('Location is required', 'emmie-connector');
     }
 
     // Optional fields
@@ -439,7 +439,7 @@ function wp2emmie_process_form(): array
         }
     }
     if ($referral_source !== '') {
-        $comment = __('How did you find us:', 'wp-emmie-plugin') . ' ' . $referral_source . "\n\n" . $comment;
+        $comment = __('How did you find us:', 'emmie-connector') . ' ' . $referral_source . "\n\n" . $comment;
     }
 
     $recaptcha_secret = get_option('wp2emmie_recaptcha_secret_key');
@@ -447,7 +447,7 @@ function wp2emmie_process_form(): array
 
     if ($recaptcha_secret) {
         if (!$recaptcha_response) {
-            $errors['recaptcha'] = __('Please complete the reCAPTCHA verification.', 'wp-emmie-plugin');
+            $errors['recaptcha'] = __('Please complete the reCAPTCHA verification.', 'emmie-connector');
         } else {
             $verify = wp_remote_post('https://www.google.com/recaptcha/api/siteverify', [
                 'body' => [
@@ -460,7 +460,7 @@ function wp2emmie_process_form(): array
             $body = json_decode(wp_remote_retrieve_body($verify), true);
 
             if (empty($body['success'])) {
-                $errors['recaptcha'] = __('reCAPTCHA verification failed. Please try again.', 'wp-emmie-plugin');
+                $errors['recaptcha'] = __('reCAPTCHA verification failed. Please try again.', 'emmie-connector');
             }
         }
     }
@@ -469,24 +469,24 @@ function wp2emmie_process_form(): array
         return [
             'success' => false,
             'errors' => $errors,
-            'message' => "<div style='color:red;'>" . __('Please correct the errors above before submitting.', 'wp-emmie-plugin') . '</div>',
+            'message' => "<div style='color:red;'>" . __('Please correct the errors above before submitting.', 'emmie-connector') . '</div>',
         ];
     }
 
-    $api_url = get_option('wp2emmie_api_url');
+    $emmie_origin = wp2emmie_emmie_origin();
     $api_token_encrypted = get_option('wp2emmie_api_token');
 
-    if (!$api_url || !$api_token_encrypted) {
+    if ($emmie_origin === '' || !$api_token_encrypted) {
         return [
             'success' => false,
-            'message' => "<div style='color:red;'>" . __('API not configured. Please contact support.', 'wp-emmie-plugin') . '</div>',
+            'message' => "<div style='color:red;'>" . __('API not configured. Please contact support.', 'emmie-connector') . '</div>',
         ];
     }
 
-    $encryption = new FSD_Data_Encryption;
+    $encryption = new WP2Emmie_Data_Encryption;
     $api_token = $encryption->decrypt($api_token_encrypted);
 
-    $api_endpoint = $api_url . '/api/intake';
+    $api_endpoint = $emmie_origin . '/api/intake';
 
     // Build multipart body for file upload support
     $boundary = wp_generate_password(24, false);
@@ -596,12 +596,12 @@ function wp2emmie_process_form(): array
 
         return [
             'success' => false,
-            'message' => "<div style='color:red;'>" . __('Submission failed:', 'wp-emmie-plugin') . ' ' . $message_text . '</div>',
+            'message' => "<div style='color:red;'>" . __('Submission failed:', 'emmie-connector') . ' ' . $message_text . '</div>',
         ];
     }
 
     return [
         'success' => true,
-        'message' => "<div style='color:green;'>" . __('Thank you! Your information has been submitted.', 'wp-emmie-plugin') . '</div>',
+        'message' => "<div style='color:green;'>" . __('Thank you! Your information has been submitted.', 'emmie-connector') . '</div>',
     ];
 }

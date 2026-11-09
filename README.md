@@ -7,7 +7,7 @@ platform. It adds two things to the site:
   Once the token checks out, the plugin creates a page `/kennismaken` with this form.
 - **The booking form for introductory meetings** (`[emmie_kennismaking]`), which Emmie draws into the page.
 
-The organisation enters its Emmie API address and an API token under *Settings › WP Emmie Plugin*. Emmie shows both
+The organisation enters its Emmie API address and an API token under *Settings › Emmie Connector*. Emmie shows both
 under *Instellingen › Instroom*. reCAPTCHA v3 keys are optional and protect the intake form against bots.
 
 The plugin is maintained by Emmie B.V. This repository is its source; `readme.txt` is the description the plugin
@@ -43,12 +43,12 @@ docker compose -f docker-compose.test.yml down -v
 
 | File | What it does |
 |---|---|
-| `wp-emmie-plugin.php` | Plugin header, activation, the setup redirect and the clean-up on deactivation |
+| `emmie-connector.php` | Plugin header, activation, the setup redirect and the clean-up on deactivation |
 | `admin-settings.php` | The settings page and the token check against Emmie |
 | `form-handler.php` | The intake form and sending it to Emmie |
 | `booking-form.php` | The booking form for introductory meetings |
-| `fsd-data-encryption.php` | Encrypts the API token at rest with the site's own keys |
-| `functions.php` | Logging of failed HTTP calls and the privacy statement link |
+| `class-wp2emmie-data-encryption.php` | Encrypts the API token at rest with the site's own keys |
+| `functions.php` | The Emmie address, logging of failed HTTP calls and the privacy statement link |
 | `languages/` | Dutch translation |
 
 ## License

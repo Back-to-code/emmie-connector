@@ -10,7 +10,8 @@
     <arg value="sp"/>
 
     <config name="testVersion" value="8.0-"/>
-    <config name="text_domain" value="wp-emmie-plugin"/>
+    <config name="text_domain" value="emmie-connector"/>
+    <config name="prefixes" value="wp2emmie"/>
 
     <rule ref="PHPCompatibilityWP"/>
 
@@ -48,8 +49,6 @@
         <exclude name="WordPress.Arrays.ArrayDeclarationSpacing.AssociativeArrayFound"/>
         <exclude name="WordPress.Arrays.ArrayKeySpacingRestrictions.NoSpacesAroundArrayKeys"/>
         <exclude name="WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned"/>
-        <exclude name="WordPress.WP.CapitalPDangit.MisspelledInComment"/>
-        <exclude name="WordPress.WP.CapitalPDangit.MisspelledInText"/>
         <exclude name="WordPress.WhiteSpace.CastStructureSpacing.NoSpaceBeforeOpenParenthesis"/>
         <exclude name="WordPress.WhiteSpace.ControlStructureSpacing.NoSpaceAfterOpenParenthesis"/>
         <exclude name="WordPress.WhiteSpace.ControlStructureSpacing.NoSpaceBeforeCloseParenthesis"/>
@@ -62,7 +61,6 @@
         <exclude name="Universal.NamingConventions.NoReservedKeywordParameterNames.classFound"/>
         <exclude name="Universal.Operators.DisallowShortTernary.Found"/>
         <exclude name="WordPress.DateTime.RestrictedFunctions.date_date"/>
-        <exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
         <exclude name="WordPress.PHP.DevelopmentFunctions.error_log_error_log"/>
         <exclude name="WordPress.PHP.YodaConditions.NotYoda"/>
         <exclude name="WordPress.Security.EscapeOutput.OutputNotEscaped"/>

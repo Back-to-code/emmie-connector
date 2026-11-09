@@ -5,15 +5,6 @@ declare(strict_types = 1);
 add_shortcode('emmie_kennismaking', 'wp2emmie_render_booking_form');
 
 /**
- * The organisation's own Emmie, from the plugin's API URL. Emmie's Instroom page offers that URL with /api, while the
- * plugin appends /api itself, so either form is read.
- */
-function wp2emmie_emmie_origin(): string
-{
-    return (string) preg_replace('#/api$#', '', untrailingslashit((string) get_option('wp2emmie_api_url')));
-}
-
-/**
  * The booking form for introductory meetings, as Emmie's own script draws it into the page (EMMIE-2740). The base
  * style follows the plugin setting, unless the shortcode says opmaak="basis" or opmaak="geen".
  *
@@ -26,7 +17,7 @@ function wp2emmie_render_booking_form(array|string $atts = []): string
 
     if ($origin === '' || !get_option('wp2emmie_token_is_valid')) {
         return current_user_can('manage_options')
-            ? '<p class="wp2emmie-notice">' . esc_html__('The booking form is not shown: enter a valid Emmie API URL and token in the plugin settings. Visitors see nothing here.', 'wp-emmie-plugin') . '</p>'
+            ? '<p class="wp2emmie-notice">' . esc_html__('The booking form is not shown: enter a valid Emmie API URL and token in the plugin settings. Visitors see nothing here.', 'emmie-connector') . '</p>'
             : '';
     }
 
@@ -36,7 +27,7 @@ function wp2emmie_render_booking_form(array|string $atts = []): string
 
     // The script replaces the link with the form; when the script cannot load, the visitor still reaches Emmie's booking page.
     return '<div data-emmie-kennismaking' . ($base_style ? ' data-opmaak="basis"' : '') . '><p><a href="' . esc_url($origin . '/kennismaking') . '">'
-        . esc_html__('Plan an introductory meeting', 'wp-emmie-plugin') . '</a></p></div>';
+        . esc_html__('Plan an introductory meeting', 'emmie-connector') . '</a></p></div>';
 }
 
 /**

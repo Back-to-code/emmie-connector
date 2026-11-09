@@ -9,9 +9,9 @@
 #      php backend/artisan tinker → $customer->domains()->firstOrCreate(['domain' => 'script.emmie.test']);
 #   3. Update extra_hosts below to match that domain
 #   4. Open http://localhost:8080, finish WP wizard, activate the plugin
-#   5. In WP plugin settings, set API URL to http://script.emmie.test:8000
-#      (NOT the /api URL shown in Emmie — the plugin appends /api/ itself)
-#   6. Generate an API token in Emmie (Settings > Inflow) and paste it in WP settings
+#   5. In Emmie, under Instellingen > Instroom, switch on the intake form and make an API token
+#   6. In the plugin settings, set the API URL to http://script.emmie.test:8000/api (as Emmie shows it; without
+#      /api works too) and paste the token
 #
 # Teardown:
 #   docker compose -f docker-compose.test.yml down -v
@@ -29,7 +29,7 @@ services:
     extra_hosts:
       - "script.emmie.test:host-gateway"
     volumes:
-      - ./:/var/www/html/wp-content/plugins/wp-emmie-plugin
+      - ./:/var/www/html/wp-content/plugins/emmie-connector
       - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
       - wp-data:/var/www/html
     depends_on:

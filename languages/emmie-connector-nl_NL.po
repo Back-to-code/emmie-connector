@@ -1,0 +1,361 @@
+# Copyright (C) 2026 Emmie B.V.
+# This file is distributed under the same license as the Emmie Connector plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Emmie Connector 1.4.0\n"
+"Report-Msgid-Bugs-To: https://github.com/Back-to-code/emmie-connector/"
+"issues\n"
+"POT-Creation-Date: 2026-11-09T11:58:52+00:00\n"
+"PO-Revision-Date: 2026-04-10 12:00+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.7\n"
+"X-Domain: emmie-connector\n"
+
+#. Plugin Name of the plugin
+#: emmie-connector.php
+msgid "Emmie Connector"
+msgstr "Emmie Connector"
+
+#. Description of the plugin
+#: emmie-connector.php
+msgid ""
+"Connects your website to Emmie: an intake form that adds a new client to "
+"your Emmie, and Emmie's booking form for introductory meetings."
+msgstr ""
+"Verbindt uw website met Emmie: een aanmeldformulier dat een nieuwe cliënt "
+"in uw Emmie zet, en het boekformulier van Emmie voor kennismakingsgesprekken."
+
+#. Author of the plugin
+#: emmie-connector.php
+msgid "Emmie B.V."
+msgstr "Emmie B.V."
+
+#. Author URI of the plugin
+#: emmie-connector.php
+msgid "https://emmie.nl"
+msgstr "https://emmie.nl"
+
+#: admin-settings.php:37
+msgid "Emmie API Settings"
+msgstr "Emmie API Instellingen"
+
+#: admin-settings.php:44
+msgid "API URL"
+msgstr "API URL"
+
+#: admin-settings.php:52
+msgid "API Token"
+msgstr "API Token"
+
+#: admin-settings.php:60
+msgid "reCAPTCHA v3 Site Key"
+msgstr "reCAPTCHA v3 Site Sleutel"
+
+#: admin-settings.php:68
+msgid "reCAPTCHA v3 Secret Key"
+msgstr "reCAPTCHA v3 Geheime Sleutel"
+
+#: admin-settings.php:76
+msgid "Booking form"
+msgstr "Boekformulier"
+
+#: admin-settings.php:86
+msgid "Neutral base style from Emmie"
+msgstr "Neutrale basisopmaak van Emmie"
+
+#: admin-settings.php:87
+msgid ""
+"Without it, your theme styles the booking form of [emmie_kennismaking] "
+"entirely. A shortcode can choose per page with opmaak=\"basis\" or "
+"opmaak=\"geen\"."
+msgstr ""
+"Zonder basisopmaak bepaalt uw thema hoe het boekformulier van "
+"[emmie_kennismaking] eruitziet. Een shortcode kan per pagina kiezen met "
+"opmaak=\"basis\" of opmaak=\"geen\"."
+
+#: admin-settings.php:126
+msgid "Configure Emmie API Connection"
+msgstr "Emmie API verbinding configureren"
+
+#: admin-settings.php:128
+msgid ""
+"Welcome! Please enter your Emmie API credentials to begin using the plugin."
+msgstr ""
+"Welkom! Vul alstublieft uw Emmie API gegevens in om de plugin te gebruiken."
+
+#: admin-settings.php:129
+msgid ""
+"You can find your API credentials in your Emmie app under Settings > Inflow."
+msgstr ""
+"U kunt uw API gegevens vinden in uw Emmie app onder Instellingen > Instroom."
+
+#. translators: %s: the address of the WordPress privacy settings
+#: admin-settings.php:134
+#, php-format
+msgid ""
+"The intake form links to Emmie's privacy statement, because this site has "
+"none. Choose your own privacy statement under <a href=\"%s\">Settings &gt; "
+"Privacy</a>: the personal data from the form are yours."
+msgstr ""
+"Het aanmeldformulier linkt naar de privacyverklaring van Emmie, omdat deze "
+"site er geen heeft. Kies uw eigen privacyverklaring onder <a "
+"href=\"%s\">Instellingen &gt; Privacy</a>: de persoonsgegevens uit het "
+"formulier zijn van uw organisatie."
+
+#: admin-settings.php:142
+msgid "Save & Activate"
+msgstr "Opslaan & Activeren"
+
+#: admin-settings.php:142
+msgid "Save Changes"
+msgstr "Wijzigingen Opslaan"
+
+#: admin-settings.php:181
+msgid "API URL and Token are required"
+msgstr "API URL en token zijn verplicht"
+
+#: admin-settings.php:202
+msgid "Could not connect to the Emmie API: "
+msgstr "Kan niet verbinden met de Emmie API: "
+
+#: admin-settings.php:215
+msgid ""
+"API token validation failed . Please check whether your API URL is correct."
+msgstr ""
+
+#: admin-settings.php:221
+msgid "API token validation failed (HTTP "
+msgstr ""
+
+#: admin-settings.php:227
+msgid "API token validated successfully."
+msgstr "API Token succesvol gevalideerd."
+
+#: admin-settings.php:252 admin-settings.php:277
+msgid ""
+"✅ API token validated successfully. The kennismaken page has been created: "
+"<a href=\""
+msgstr ""
+
+#: booking-form.php:20
+msgid ""
+"The booking form is not shown: enter a valid Emmie API URL and token in the "
+"plugin settings. Visitors see nothing here."
+msgstr ""
+"Het boekformulier wordt niet getoond: vul een geldige Emmie API URL en token "
+"in bij de instellingen van de plugin. Bezoekers zien hier niets."
+
+#: booking-form.php:30 form-handler.php:367
+msgid "Plan an introductory meeting"
+msgstr "Plan een kennismakingsgesprek"
+
+#: emmie-connector.php:49
+msgid "Deactivate"
+msgstr "Deactiveren"
+
+#: emmie-connector.php:63
+msgid "Do you want to delete all Emmie Connector settings and data?"
+msgstr "Wilt u alle instellingen en gegevens van Emmie Connector verwijderen?"
+
+#: form-handler.php:53
+msgid "The form is not available"
+msgstr "Het formulier is niet beschikbaar"
+
+#: form-handler.php:109
+msgid "First Name"
+msgstr "Voornaam"
+
+#: form-handler.php:118
+msgid "Last Name"
+msgstr "Achternaam"
+
+#: form-handler.php:127
+msgid "Email Address"
+msgstr "E-mailadres"
+
+#: form-handler.php:136
+msgid "Telephone Number"
+msgstr "Telefoonnummer"
+
+#: form-handler.php:147
+msgid "Street"
+msgstr "Straat"
+
+#: form-handler.php:151
+msgid "House Number"
+msgstr "Huisnummer"
+
+#: form-handler.php:155
+msgid "Addition"
+msgstr "Toevoeging"
+
+#: form-handler.php:159
+msgid "Zipcode"
+msgstr "Postcode"
+
+#: form-handler.php:163
+msgid "City"
+msgstr "Plaats"
+
+#: form-handler.php:171
+msgid "Which location are you interested in?"
+msgstr "Voor welke locatie heeft u interesse?"
+
+#: form-handler.php:173
+msgid "Select a location"
+msgstr "Selecteer een locatie"
+
+#: form-handler.php:190
+msgid "Income Situation"
+msgstr "Inkomenssituatie"
+
+#: form-handler.php:192
+msgid "Select income situation"
+msgstr "Selecteer inkomenssituatie"
+
+#: form-handler.php:206
+msgid "Contact Preference"
+msgstr "Contactvoorkeur"
+
+#: form-handler.php:208
+msgid "Select contact preference"
+msgstr "Selecteer contactvoorkeur"
+
+#: form-handler.php:224
+msgid "Add contact person"
+msgstr "Begeleider of contactpersoon toevoegen"
+
+#: form-handler.php:229
+msgid "Contact First Name"
+msgstr "Voornaam contactpersoon"
+
+#: form-handler.php:233
+msgid "Contact Last Name"
+msgstr "Achternaam contactpersoon"
+
+#: form-handler.php:237
+msgid "Organisation"
+msgstr "Organisatie"
+
+#: form-handler.php:241
+msgid "Contact Email"
+msgstr "E-mailadres contactpersoon"
+
+#: form-handler.php:245
+msgid "Contact Phone Number"
+msgstr "Telefoonnummer contactpersoon"
+
+#: form-handler.php:251
+msgid "The organisation may contact this person before the first meeting"
+msgstr ""
+"De organisatie mag contact opnemen met deze persoon vóór het eerste gesprek"
+
+#: form-handler.php:261
+msgid "How did you find us?"
+msgstr "Hoe heeft u ons gevonden?"
+
+#: form-handler.php:263
+msgid "Select an option"
+msgstr "Selecteer een optie"
+
+#: form-handler.php:272
+msgid "Please specify"
+msgstr "Geef aan"
+
+#: form-handler.php:280
+msgid "Documents"
+msgstr "Documenten"
+
+#: form-handler.php:282
+msgid ""
+"Allowed formats: doc, docx, rtf, xls, xlsx, txt, jpg, jpeg, png, pdf. Max "
+"40MB per file."
+msgstr ""
+"Toegestane formaten: doc, docx, rtf, xls, xlsx, txt, jpg, jpeg, png, pdf. "
+"Maximaal 40MB per bestand."
+
+#: form-handler.php:288
+msgid "Comments"
+msgstr "Opmerkingen"
+
+#: form-handler.php:297
+msgid "Personal Data"
+msgstr "Persoonsgegevens"
+
+#. translators: %s: the address of the privacy statement
+#: form-handler.php:304
+#, php-format
+msgid ""
+"By checking this box, you agree to the processing of your personal data "
+"according to the <a href=\"%s\" target=\"_blank\">privacy statement</a>"
+msgstr ""
+"Door bovenstaande te selecteren gaat u akkoord met de verwerking van uw "
+"persoonsgegevens volgens de <a href=\"%s\" "
+"target=\"_blank\">privacyverklaring</a>"
+
+#: form-handler.php:322 form-handler.php:330
+msgid "Submit"
+msgstr "Verzenden"
+
+#: form-handler.php:381
+msgid "Security check failed. Please reload the page and try again."
+msgstr ""
+"Beveiligingscontrole mislukt. Laad de pagina opnieuw en probeer het nog eens."
+
+#: form-handler.php:387
+msgid "You must agree to share the submitted personal data"
+msgstr "U moet akkoord gaan met de verwerking van uw persoonsgegevens"
+
+#: form-handler.php:398
+msgid "First Name is required"
+msgstr "Voornaam is verplicht"
+
+#: form-handler.php:401
+msgid "Last Name is required"
+msgstr "Achternaam is verplicht"
+
+#: form-handler.php:404
+msgid "Please enter a valid email address"
+msgstr "Vul een geldig e-mailadres in"
+
+#: form-handler.php:407
+msgid "Please enter a valid phone number"
+msgstr "Vul een geldig telefoonnummer in"
+
+#: form-handler.php:412
+msgid "Location is required"
+msgstr "Locatie is verplicht"
+
+#: form-handler.php:442
+msgid "How did you find us:"
+msgstr "Hoe bij ons terechtgekomen:"
+
+#: form-handler.php:450
+msgid "Please complete the reCAPTCHA verification."
+msgstr "Bevestig alstublieft de reCAPTCHA verificatie."
+
+#: form-handler.php:463
+msgid "reCAPTCHA verification failed. Please try again."
+msgstr "reCAPTCHA verificatie mislukt."
+
+#: form-handler.php:472
+msgid "Please correct the errors above before submitting."
+msgstr ""
+"Verbeter alstublieft de fouten in het formulier voordat u op Verzenden klikt."
+
+#: form-handler.php:482
+msgid "API not configured. Please contact support."
+msgstr "API niet ingesteld. Neem alstublieft contact op met de beheerder."
+
+#: form-handler.php:599
+msgid "Submission failed:"
+msgstr "Verzending mislukt:"
+
+#: form-handler.php:605
+msgid "Thank you! Your information has been submitted."
+msgstr "Bedankt! Uw gegevens zijn verstuurd."
