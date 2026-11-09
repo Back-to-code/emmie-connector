@@ -2,13 +2,16 @@
 
 declare(strict_types = 1);
 
+\defined('ABSPATH') || exit;
+
 add_action('admin_menu', 'wp2emmie_add_admin_menu');
 add_action('admin_init', 'wp2emmie_settings_init');
 
 add_action('admin_notices', function(): void {
-    if ($notice = get_transient('wp2emmie_token_status')) {
+    $notice = get_transient('wp2emmie_token_status');
+    if ($notice) {
         $class = $notice['type'] === 'error' ? 'notice-error' : 'notice-success';
-        echo '<div class="notice ' . esc_attr($class) . ' is-dismissible"><p>' . $notice['message'] . '</p></div>';
+        echo '<div class="notice ' . esc_attr($class) . ' is-dismissible"><p>' . wp_kses($notice['message'], ['a' => ['href' => true, 'target' => true]]) . '</p></div>';
         delete_transient('wp2emmie_token_status');
     }
 });
@@ -82,8 +85,7 @@ function wp2emmie_settings_init(): void
 
 function wp2emmie_booking_base_style_render(): void
 {
-    $checked = get_option('wp2emmie_booking_base_style') ? 'checked' : '';
-    echo "<label><input type='checkbox' name='wp2emmie_booking_base_style' value='1' " . $checked . '> ' . esc_html__('Neutral base style from Emmie', 'emmie-connector') . '</label>';
+    echo "<label><input type='checkbox' name='wp2emmie_booking_base_style' value='1' " . checked((bool) get_option('wp2emmie_booking_base_style'), true, false) . '> ' . esc_html__('Neutral base style from Emmie', 'emmie-connector') . '</label>';
     echo '<p class="description">' . esc_html__('Without it, your theme styles the booking form of [emmie_kennismaking] entirely. A shortcode can choose per page with opmaak="basis" or opmaak="geen".', 'emmie-connector') . '</p>';
 }
 
@@ -119,20 +121,25 @@ function wp2emmie_recaptcha_secret_key_render(): void
 
 function wp2emmie_options_page(): void
 {
-    $is_setup_mode = isset($_GET['setup']) && $_GET['setup'] === '1';
+    // Only chooses the welcome text of the first visit after activation; nothing is changed.
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+    $is_setup_mode = isset($_GET['setup']) && sanitize_text_field(wp_unslash($_GET['setup'])) === '1';
 
     ?>
     <div class="wrap">
-        <h1><?= $is_setup_mode ? _e('Configure Emmie API Connection', 'emmie-connector') : 'Emmie Connector'; ?></h1>
+        <h1><?php echo esc_html($is_setup_mode ? __('Configure Emmie API Connection', 'emmie-connector') : 'Emmie Connector'); ?></h1>
         <?php if ($is_setup_mode) { ?>
-            <p> <?php _e('Welcome! Please enter your Emmie API credentials to begin using the plugin.', 'emmie-connector'); ?></p>
-            <p> <?php _e('You can find your API credentials in your Emmie app under Settings > Inflow.', 'emmie-connector'); ?></p>
+            <p> <?php esc_html_e('Welcome! Please enter your Emmie API credentials to begin using the plugin.', 'emmie-connector'); ?></p>
+            <p> <?php esc_html_e('You can find your API credentials in your Emmie app under Settings > Inflow.', 'emmie-connector'); ?></p>
         <?php } ?>
         <?php if (get_privacy_policy_url() === '') { ?>
-            <div class="notice notice-warning inline"><p><?= \sprintf(
-                // translators: %s: the address of the WordPress privacy settings
-                __('The intake form links to Emmie\'s privacy statement, because this site has none. Choose your own privacy statement under <a href="%s">Settings &gt; Privacy</a>: the personal data from the form are yours.', 'emmie-connector'),
-                esc_url(admin_url('options-privacy.php')),
+            <div class="notice notice-warning inline"><p><?php echo wp_kses(
+                \sprintf(
+                    // translators: %s: the address of the WordPress privacy settings
+                    __('The intake form links to Emmie\'s privacy statement, because this site has none. Choose your own privacy statement under <a href="%s">Settings &gt; Privacy</a>: the personal data from the form are yours.', 'emmie-connector'),
+                    esc_url(admin_url('options-privacy.php')),
+                ),
+                ['a' => ['href' => true]],
             ); ?></p></div>
         <?php } ?>
         <form action="options.php" method="post">
@@ -199,7 +206,11 @@ function wp2emmie_validate_token_on_save(): void
     if (is_wp_error($response)) {
         set_transient('wp2emmie_token_status', [
             'type' => 'error',
-            'message' => __('Could not connect to the Emmie API: ', 'emmie-connector') . $response->get_error_message(),
+            'message' => \sprintf(
+                // translators: %s: the reason WordPress gives for the failed connection
+                __('Could not connect to the Emmie API: %s', 'emmie-connector'),
+                esc_html($response->get_error_message()),
+            ),
         ], 10);
         update_option('wp2emmie_token_is_valid', false);
 
@@ -212,13 +223,17 @@ function wp2emmie_validate_token_on_save(): void
         update_option('wp2emmie_token_is_valid', false);
         set_transient('wp2emmie_token_status', [
             'type' => 'error',
-            'message' => __('API token validation failed . Please check whether your API URL is correct.', 'emmie-connector'),
+            'message' => __('API token validation failed. Please check whether your API URL is correct.', 'emmie-connector'),
         ], 10);
     } elseif ($code !== 200) {
         update_option('wp2emmie_token_is_valid', false);
         set_transient('wp2emmie_token_status', [
             'type' => 'error',
-            'message' => __('API token validation failed (HTTP ' . $code . '). Please check your token.', 'emmie-connector'),
+            'message' => \sprintf(
+                // translators: %d: the HTTP status code Emmie answered with
+                __('API token validation failed (HTTP %d). Please check your token.', 'emmie-connector'),
+                (int) $code,
+            ),
         ], 10);
     } else {
         update_option('wp2emmie_token_is_valid', true);
@@ -250,7 +265,7 @@ function wp2emmie_validate_token_on_save(): void
 
                 set_transient('wp2emmie_token_status', [
                     'type' => 'success',
-                    'message' => __('✅ API token validated successfully. The kennismaken page has been created: <a href="' . $page_url . '" target="_blank">' . esc_html($page_url) . '</a>', 'emmie-connector'),
+                    'message' => wp2emmie_page_created_message((string) $page_url),
                 ], 10);
             }
         } elseif (get_option('wp2emmie_form_page_created') === false) {
@@ -275,8 +290,17 @@ function wp2emmie_validate_token_on_save(): void
 
             set_transient('wp2emmie_token_status', [
                 'type' => 'success',
-                'message' => __('✅ API token validated successfully. The kennismaken page has been created: <a href="' . $page_url . '" target="_blank">' . esc_html($page_url) . '</a>', 'emmie-connector'),
+                'message' => wp2emmie_page_created_message((string) $page_url),
             ], 10);
         }
     }
+}
+
+function wp2emmie_page_created_message(string $page_url): string
+{
+    return \sprintf(
+        // translators: %s: a link to the page with the intake form
+        __('API token validated successfully. The kennismaken page has been created: %s', 'emmie-connector'),
+        '<a href="' . esc_url($page_url) . '" target="_blank">' . esc_html($page_url) . '</a>',
+    );
 }

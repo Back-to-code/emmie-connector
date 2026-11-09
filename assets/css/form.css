@@ -1,0 +1,32 @@
+#emmie-form .wp2emmie-field-error {
+    border-color: #dc3232;
+}
+
+#emmie-form .wp2emmie-error-text {
+    color: #dc3232;
+    font-size: 12px;
+    margin-top: 4px;
+    display: block;
+}
+
+#emmie-form label.required::after {
+    content: '*';
+    color: #dc3232;
+}
+
+#emmie-form .wp2emmie-section {
+    margin-bottom: 10px;
+}
+
+#emmie-form .wp2emmie-contact-fields {
+    display: none;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+#emmie-form .wp2emmie-referral-other {
+    display: none;
+    margin-top: 5px;
+}

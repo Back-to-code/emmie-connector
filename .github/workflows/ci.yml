@@ -45,3 +45,16 @@ jobs:
         run: composer install --no-interaction --no-progress
       - name: Run PHPCS
         run: vendor/bin/phpcs
+
+  plugin-check:
+    name: Plugin Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Build the plugin as WordPress.org gets it
+        run: |
+          mkdir -p build/emmie-connector
+          rsync -a --exclude-from=.distignore ./ build/emmie-connector/
+      - uses: WordPress/plugin-check-action@10857da14b6c2246d15402b3e69f777edcf8c12e # v1.1.9
+        with:
+          build-dir: build/emmie-connector

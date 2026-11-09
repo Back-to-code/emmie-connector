@@ -53,7 +53,7 @@ Yes. It is an ordinary WordPress page that you can rename or move. The plugin cr
 
 = What happens when I deactivate the plugin? =
 
-The plugin asks whether to delete its settings and data. If you choose OK, it deletes its settings and every page that holds the intake form, permanently. Choose Cancel to keep both. Deactivating several plugins at once keeps both too.
+The plugin asks whether to delete its settings as well, and to move every page with the intake form to the trash. Choose Cancel to keep both. Deactivating several plugins at once keeps both too.
 
 = I have the plugin from Emmie as a zip. How do I switch? =
 
@@ -65,6 +65,10 @@ The plugin asks whether to delete its settings and data. If you choose OK, it de
 = Which privacy statement does the form link to? =
 
 The privacy statement of your site, as set under Settings › Privacy. The personal data from the form are yours. Only while your site has none, the form links to Emmie's privacy statement.
+
+= How do I see why a form did not reach Emmie? =
+
+Turn on `WP_DEBUG` and `WP_DEBUG_LOG` in `wp-config.php`. The plugin then writes each failed call to Emmie to `wp-content/debug.log`.
 
 = Where is the API token kept? =
 
@@ -100,6 +104,10 @@ Google reCAPTCHA is provided by Google: [terms of service](https://policies.goog
 * The plugin is now called Emmie Connector, and comes from the WordPress.org plugin directory.
 * The API address works with and without `/api` at the end, as Emmie shows it.
 * Adding a WordPress user no longer ends in a critical error.
+* A form that could not reach Emmie no longer says it was sent.
+* After a mistake in the form, the chosen location and options stay selected.
+* Names and comments with an apostrophe reach Emmie without an added backslash.
+* Deactivating with deletion moves the form pages to the trash instead of deleting them for good.
 
 = 1.3.0 =
 * The booking form for introductory meetings, with the shortcode `[emmie_kennismaking]`.

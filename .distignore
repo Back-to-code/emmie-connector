@@ -1,0 +1,14 @@
+# Left out of the plugin as WordPress.org gets it.
+/.git
+/.github
+/.distignore
+/.gitattributes
+/.gitignore
+/build
+/vendor
+/composer.json
+/composer.lock
+/phpcs.xml.dist
+/docker-compose.test.yml
+/uploads.ini
+/README.md
