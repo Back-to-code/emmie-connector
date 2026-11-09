@@ -5,7 +5,7 @@ declare(strict_types = 1);
 /**
  * Class responsible for encrypting and decrypting data.
  */
-final class FSD_Data_Encryption
+final class WP2Emmie_Data_Encryption
 {
     /**
      * Key to use for encryption.

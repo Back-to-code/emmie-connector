@@ -29,7 +29,7 @@ services:
     extra_hosts:
       - "script.emmie.test:host-gateway"
     volumes:
-      - ./:/var/www/html/wp-content/plugins/wp-emmie-plugin
+      - ./:/var/www/html/wp-content/plugins/emmie-connector
       - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
       - wp-data:/var/www/html
     depends_on:

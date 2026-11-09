@@ -16,8 +16,8 @@ add_action('admin_notices', function(): void {
 function wp2emmie_add_admin_menu(): void
 {
     add_options_page(
-        'WP Emmie Plugin',
-        'WP Emmie Plugin',
+        'Emmie Connector',
+        'Emmie Connector',
         'manage_options',
         'wp2emmie_connector',
         'wp2emmie_options_page',
@@ -34,14 +34,14 @@ function wp2emmie_settings_init(): void
 
     add_settings_section(
         'wp2emmie_section_main',
-        __('Emmie API Settings', 'wp-emmie-plugin'),
+        __('Emmie API Settings', 'emmie-connector'),
         null,
         'wp2emmie_settings',
     );
 
     add_settings_field(
         'wp2emmie_api_url',
-        __('API URL', 'wp-emmie-plugin'),
+        __('API URL', 'emmie-connector'),
         'wp2emmie_api_url_render',
         'wp2emmie_settings',
         'wp2emmie_section_main',
@@ -49,7 +49,7 @@ function wp2emmie_settings_init(): void
 
     add_settings_field(
         'wp2emmie_api_token',
-        __('API Token', 'wp-emmie-plugin'),
+        __('API Token', 'emmie-connector'),
         'wp2emmie_api_token_render',
         'wp2emmie_settings',
         'wp2emmie_section_main',
@@ -57,7 +57,7 @@ function wp2emmie_settings_init(): void
 
     add_settings_field(
         'wp2emmie_recaptcha_site_key',
-        __('reCAPTCHA v3 Site Key', 'wp-emmie-plugin'),
+        __('reCAPTCHA v3 Site Key', 'emmie-connector'),
         'wp2emmie_recaptcha_site_key_render',
         'wp2emmie_settings',
         'wp2emmie_section_main',
@@ -65,7 +65,7 @@ function wp2emmie_settings_init(): void
 
     add_settings_field(
         'wp2emmie_recaptcha_secret_key',
-        __('reCAPTCHA v3 Secret Key', 'wp-emmie-plugin'),
+        __('reCAPTCHA v3 Secret Key', 'emmie-connector'),
         'wp2emmie_recaptcha_secret_key_render',
         'wp2emmie_settings',
         'wp2emmie_section_main',
@@ -73,7 +73,7 @@ function wp2emmie_settings_init(): void
 
     add_settings_field(
         'wp2emmie_booking_base_style',
-        __('Booking form', 'wp-emmie-plugin'),
+        __('Booking form', 'emmie-connector'),
         'wp2emmie_booking_base_style_render',
         'wp2emmie_settings',
         'wp2emmie_section_main',
@@ -83,8 +83,8 @@ function wp2emmie_settings_init(): void
 function wp2emmie_booking_base_style_render(): void
 {
     $checked = get_option('wp2emmie_booking_base_style') ? 'checked' : '';
-    echo "<label><input type='checkbox' name='wp2emmie_booking_base_style' value='1' " . $checked . '> ' . esc_html__('Neutral base style from Emmie', 'wp-emmie-plugin') . '</label>';
-    echo '<p class="description">' . esc_html__('Without it, your theme styles the booking form of [emmie_kennismaking] entirely. A shortcode can choose per page with opmaak="basis" or opmaak="geen".', 'wp-emmie-plugin') . '</p>';
+    echo "<label><input type='checkbox' name='wp2emmie_booking_base_style' value='1' " . $checked . '> ' . esc_html__('Neutral base style from Emmie', 'emmie-connector') . '</label>';
+    echo '<p class="description">' . esc_html__('Without it, your theme styles the booking form of [emmie_kennismaking] entirely. A shortcode can choose per page with opmaak="basis" or opmaak="geen".', 'emmie-connector') . '</p>';
 }
 
 function wp2emmie_api_url_render(): void
@@ -98,7 +98,7 @@ function wp2emmie_api_token_render(): void
     $value_encrypted = get_option('wp2emmie_api_token');
     $value = '';
     if ($value_encrypted) {
-        $encryption = new FSD_Data_Encryption;
+        $encryption = new WP2Emmie_Data_Encryption;
         $decrypted = $encryption->decrypt($value_encrypted);
         $value = $decrypted !== false ? $decrypted : '';
     }
@@ -123,15 +123,15 @@ function wp2emmie_options_page(): void
 
     ?>
     <div class="wrap">
-        <h1><?= $is_setup_mode ? _e('Configure Emmie API Connection', 'wp-emmie-plugin') : 'Wordpress Emmie Plugin'; ?></h1>
+        <h1><?= $is_setup_mode ? _e('Configure Emmie API Connection', 'emmie-connector') : 'Emmie Connector'; ?></h1>
         <?php if ($is_setup_mode) { ?>
-            <p> <?php _e('Welcome! Please enter your Emmie API credentials to begin using the plugin.', 'wp-emmie-plugin'); ?></p>
-            <p> <?php _e('You can find your API credentials in your Emmie app under Settings > Inflow.', 'wp-emmie-plugin'); ?></p>
+            <p> <?php _e('Welcome! Please enter your Emmie API credentials to begin using the plugin.', 'emmie-connector'); ?></p>
+            <p> <?php _e('You can find your API credentials in your Emmie app under Settings > Inflow.', 'emmie-connector'); ?></p>
         <?php } ?>
         <?php if (get_privacy_policy_url() === '') { ?>
             <div class="notice notice-warning inline"><p><?= \sprintf(
                 // translators: %s: the address of the WordPress privacy settings
-                __('The intake form links to Emmie\'s privacy statement, because this site has none. Choose your own privacy statement under <a href="%s">Settings &gt; Privacy</a>: the personal data from the form are yours.', 'wp-emmie-plugin'),
+                __('The intake form links to Emmie\'s privacy statement, because this site has none. Choose your own privacy statement under <a href="%s">Settings &gt; Privacy</a>: the personal data from the form are yours.', 'emmie-connector'),
                 esc_url(admin_url('options-privacy.php')),
             ); ?></p></div>
         <?php } ?>
@@ -139,25 +139,25 @@ function wp2emmie_options_page(): void
             <?php
                 settings_fields('wp2emmie_settings');
     do_settings_sections('wp2emmie_settings');
-    submit_button($is_setup_mode ? __('Save & Activate', 'wp-emmie-plugin') : __('Save Changes', 'wp-emmie-plugin'));
+    submit_button($is_setup_mode ? __('Save & Activate', 'emmie-connector') : __('Save Changes', 'emmie-connector'));
     ?>
         </form>
     </div>
 <?php
 }
 
-add_filter('pre_update_option_wp2emmie_api_token', 'pre_update_api_token_option', 10, 2);
+add_filter('pre_update_option_wp2emmie_api_token', 'wp2emmie_encrypt_api_token_option', 10, 2);
 add_action('update_option_wp2emmie_api_token', 'wp2emmie_validate_token_on_save', 10, 2);
 add_action('add_option_wp2emmie_api_token', 'wp2emmie_validate_token_on_save', 10, 2);
 add_action('update_option_wp2emmie_api_url', 'wp2emmie_validate_token_on_save', 10, 2);
 add_action('add_option_wp2emmie_api_url', 'wp2emmie_validate_token_on_save', 10, 2);
 
-function pre_update_api_token_option($new_value, $old_value)
+function wp2emmie_encrypt_api_token_option($new_value, $old_value)
 {
     if (empty($new_value)) {
         return $old_value;
     }
-    $encryption = new FSD_Data_Encryption;
+    $encryption = new WP2Emmie_Data_Encryption;
 
     return $encryption->encrypt($new_value);
 }
@@ -171,23 +171,23 @@ function wp2emmie_validate_token_on_save(): void
         add_option('wp2emmie_token_is_valid', true);
     }
 
-    $api_url = get_option('wp2emmie_api_url');
+    $emmie_origin = wp2emmie_emmie_origin();
     $api_token_encrypted = get_option('wp2emmie_api_token');
 
-    if (!$api_url || !$api_token_encrypted) {
+    if ($emmie_origin === '' || !$api_token_encrypted) {
         update_option('wp2emmie_token_is_valid', false);
         set_transient('wp2emmie_token_status', [
             'type' => 'error',
-            'message' => __('API URL and Token are required', 'wp-emmie-plugin'),
+            'message' => __('API URL and Token are required', 'emmie-connector'),
         ], 10);
 
         return;
     }
 
-    $encryption = new FSD_Data_Encryption;
+    $encryption = new WP2Emmie_Data_Encryption;
     $api_token = $encryption->decrypt($api_token_encrypted);
 
-    $verify_url = $api_url . '/api/plugin-token'; // Append endpoint
+    $verify_url = $emmie_origin . '/api/plugin-token';
 
     $response = wp_remote_post($verify_url, [
         'headers' => [
@@ -199,7 +199,7 @@ function wp2emmie_validate_token_on_save(): void
     if (is_wp_error($response)) {
         set_transient('wp2emmie_token_status', [
             'type' => 'error',
-            'message' => __('Could not connect to the Emmie API: ', 'wp-emmie-plugin') . $response->get_error_message(),
+            'message' => __('Could not connect to the Emmie API: ', 'emmie-connector') . $response->get_error_message(),
         ], 10);
         update_option('wp2emmie_token_is_valid', false);
 
@@ -212,19 +212,19 @@ function wp2emmie_validate_token_on_save(): void
         update_option('wp2emmie_token_is_valid', false);
         set_transient('wp2emmie_token_status', [
             'type' => 'error',
-            'message' => __('API token validation failed . Please check whether your API URL is correct.', 'wp-emmie-plugin'),
+            'message' => __('API token validation failed . Please check whether your API URL is correct.', 'emmie-connector'),
         ], 10);
     } elseif ($code !== 200) {
         update_option('wp2emmie_token_is_valid', false);
         set_transient('wp2emmie_token_status', [
             'type' => 'error',
-            'message' => __('API token validation failed (HTTP ' . $code . '). Please check your token.', 'wp-emmie-plugin'),
+            'message' => __('API token validation failed (HTTP ' . $code . '). Please check your token.', 'emmie-connector'),
         ], 10);
     } else {
         update_option('wp2emmie_token_is_valid', true);
         set_transient('wp2emmie_token_status', [
             'type' => 'success',
-            'message' => __('API token validated successfully.', 'wp-emmie-plugin'),
+            'message' => __('API token validated successfully.', 'emmie-connector'),
         ], 10);
 
         $page_slug = 'kennismaken';
@@ -249,7 +249,7 @@ function wp2emmie_validate_token_on_save(): void
 
                 set_transient('wp2emmie_token_status', [
                     'type' => 'success',
-                    'message' => __('✅ API token validated successfully. The kennismaken page has been created: <a href="' . $page_url . '" target="_blank">' . esc_html($page_url) . '</a>', 'wp-emmie-plugin'),
+                    'message' => __('✅ API token validated successfully. The kennismaken page has been created: <a href="' . $page_url . '" target="_blank">' . esc_html($page_url) . '</a>', 'emmie-connector'),
                 ], 10);
             }
         } elseif (get_option('wp2emmie_form_page_created') === false) {
@@ -274,7 +274,7 @@ function wp2emmie_validate_token_on_save(): void
 
             set_transient('wp2emmie_token_status', [
                 'type' => 'success',
-                'message' => __('✅ API token validated successfully. The kennismaken page has been created: <a href="' . $page_url . '" target="_blank">' . esc_html($page_url) . '</a>', 'wp-emmie-plugin'),
+                'message' => __('✅ API token validated successfully. The kennismaken page has been created: <a href="' . $page_url . '" target="_blank">' . esc_html($page_url) . '</a>', 'emmie-connector'),
             ], 10);
         }
     }
