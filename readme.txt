@@ -32,7 +32,7 @@ You need an organisation on Emmie to use this plugin.
 1. Install and activate the plugin. The settings page opens on its own.
 2. In Emmie, go to Instellingen › Instroom. Switch on the intake form (Kennismakingsformulier), copy the API address and make an API token.
 3. Paste both on the settings page of the plugin (Settings › Emmie Connector) and save. The plugin checks the token with Emmie.
-4. Once the token checks out, the plugin creates the page `/kennismaken` with the intake form.
+4. Once the token checks out, the plugin creates a page with the intake form at `/kennismaken`, or at `/kennismaken-` plus three characters when that address is taken.
 
 To use reCAPTCHA, create reCAPTCHA v3 keys in the Google reCAPTCHA admin console and enter both on the settings page.
 
@@ -49,17 +49,17 @@ Both forms show only after the plugin checked the API address and token with Emm
 
 = Can I change the /kennismaken address? =
 
-Yes. It is an ordinary WordPress page that you can rename or move.
+Yes. It is an ordinary WordPress page that you can rename or move. The plugin creates it only once.
 
 = What happens when I deactivate the plugin? =
 
-The plugin asks whether to delete its settings and the page with the intake form. Choose Cancel to keep both.
+The plugin asks whether to delete its settings and data. If you choose OK, it deletes its settings and every page that holds the intake form, permanently. Choose Cancel to keep both. Deactivating several plugins at once keeps both too.
 
 = I have the plugin from Emmie as a zip. How do I switch? =
 
 1. Install Emmie Connector, but do not activate it yet.
 2. Deactivate the old plugin. When it asks whether to delete its settings, choose Cancel.
-3. Activate Emmie Connector. It uses the same settings, so the form keeps working.
+3. Activate Emmie Connector. Its settings page opens with your settings filled in; click Save & Activate to check them again.
 4. Delete the old plugin.
 
 = Which privacy statement does the form link to? =
@@ -68,7 +68,7 @@ The privacy statement of your site, as set under Settings › Privacy. The perso
 
 = Where is the API token kept? =
 
-In the WordPress database, encrypted with the keys from your `wp-config.php`.
+In the WordPress database. When PHP has the OpenSSL extension, as nearly every host has, it is encrypted with the keys from your `wp-config.php`.
 
 == External services ==
 

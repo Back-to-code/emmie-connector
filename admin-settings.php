@@ -230,7 +230,8 @@ function wp2emmie_validate_token_on_save(): void
         $page_slug = 'kennismaken';
         $existing = get_page_by_path($page_slug);
 
-        if (!$existing) {
+        // Once made, the page is the site's own: renamed or moved, it is not made again.
+        if (!$existing && !get_option('wp2emmie_form_page_created')) {
             $new_page = [
                 'post_title' => 'Kennismaken',
                 'post_name' => $page_slug,
