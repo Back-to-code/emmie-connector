@@ -117,7 +117,7 @@ msgstr "Wijzigingen Opslaan"
 
 #: admin-settings.php:181
 msgid "API URL and Token are required"
-msgstr "API URL and Token zijn verplicht"
+msgstr "API URL en token zijn verplicht"
 
 #: admin-settings.php:202
 msgid "Could not connect to the Emmie API: "
@@ -204,7 +204,7 @@ msgstr "Plaats"
 
 #: form-handler.php:171
 msgid "Which location are you interested in?"
-msgstr "Ik heb interesse in de Scriptvestiging in:"
+msgstr "Voor welke locatie heeft u interesse?"
 
 #: form-handler.php:173
 msgid "Select a location"
@@ -257,7 +257,7 @@ msgstr ""
 
 #: form-handler.php:261
 msgid "How did you find us?"
-msgstr "Hoe heb je ons gevonden?"
+msgstr "Hoe heeft u ons gevonden?"
 
 #: form-handler.php:263
 msgid "Select an option"
@@ -269,7 +269,7 @@ msgstr "Geef aan"
 
 #: form-handler.php:280
 msgid "Documents"
-msgstr "Upload je CV (optioneel)"
+msgstr "Documenten"
 
 #: form-handler.php:282
 msgid ""
@@ -309,7 +309,7 @@ msgstr ""
 
 #: form-handler.php:387
 msgid "You must agree to share the submitted personal data"
-msgstr "Je moet akkoord gaan met de verwerking van uw persoonsgegevens"
+msgstr "U moet akkoord gaan met de verwerking van uw persoonsgegevens"
 
 #: form-handler.php:398
 msgid "First Name is required"
@@ -350,7 +350,7 @@ msgstr ""
 
 #: form-handler.php:482
 msgid "API not configured. Please contact support."
-msgstr "API niet ingesteld. Neemt alstublieft contact op met de beheerder."
+msgstr "API niet ingesteld. Neem alstublieft contact op met de beheerder."
 
 #: form-handler.php:599
 msgid "Submission failed:"
@@ -358,4 +358,4 @@ msgstr "Verzending mislukt:"
 
 #: form-handler.php:605
 msgid "Thank you! Your information has been submitted."
-msgstr "Bedankt! Je informatie is gedeeld."
+msgstr "Bedankt! Uw gegevens zijn verstuurd."
