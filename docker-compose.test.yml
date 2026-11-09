@@ -1,0 +1,50 @@
+# Local WP testing environment for the Emmie plugin.
+#
+# Usage:
+#   docker compose -f backend/plugins/wp-emmie-plugin/docker-compose.test.yml up -d
+#
+# Setup:
+#   1. Start the Emmie backend: php backend/artisan serve
+#   2. Add a tenant domain that Docker can resolve (NOT .localhost — it always resolves to 127.0.0.1 inside containers):
+#      php backend/artisan tinker → $customer->domains()->firstOrCreate(['domain' => 'script.emmie.test']);
+#   3. Update extra_hosts below to match that domain
+#   4. Open http://localhost:8080, finish WP wizard, activate the plugin
+#   5. In WP plugin settings, set API URL to http://script.emmie.test:8000
+#      (NOT the /api URL shown in Emmie — the plugin appends /api/ itself)
+#   6. Generate an API token in Emmie (Settings > Inflow) and paste it in WP settings
+#
+# Teardown:
+#   docker compose -f backend/plugins/wp-emmie-plugin/docker-compose.test.yml down -v
+
+services:
+  wordpress:
+    image: wordpress:latest
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: wp-db
+      WORDPRESS_DB_USER: wp
+      WORDPRESS_DB_PASSWORD: wp
+      WORDPRESS_DB_NAME: wp
+    extra_hosts:
+      - "script.emmie.test:host-gateway"
+    volumes:
+      - ./:/var/www/html/wp-content/plugins/wp-emmie-plugin
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - wp-data:/var/www/html
+    depends_on:
+      - wp-db
+
+  wp-db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: wp
+      MYSQL_USER: wp
+      MYSQL_PASSWORD: wp
+      MYSQL_ROOT_PASSWORD: wp
+    volumes:
+      - wp-db-data:/var/lib/mysql
+
+volumes:
+  wp-data:
+  wp-db-data:

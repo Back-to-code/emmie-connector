@@ -1,0 +1,318 @@
+# Copyright (C) 2025 Script
+# This file is distributed under the same license as the WP Emmie Plugin plugin.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Emmie Plugin 1.3.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-emmie-plugin\n"
+"POT-Creation-Date: 2026-04-10 12:00+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.7\n"
+"X-Domain: wp-emmie-plugin\n"
+
+#. Plugin Name of the plugin
+msgid "WP Emmie Plugin"
+msgstr ""
+
+#. Description of the plugin
+msgid "Shares client data from your Wordpress site to Emmie"
+msgstr ""
+
+#. Author of the plugin
+msgid "Script"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://emmie.nl"
+msgstr ""
+
+#: admin-settings.php
+msgid "Emmie API Settings"
+msgstr ""
+
+#: admin-settings.php
+msgid "API URL"
+msgstr ""
+
+#: admin-settings.php
+msgid "API Token"
+msgstr ""
+
+#: admin-settings.php
+msgid "reCAPTCHA v3 Site Key"
+msgstr ""
+
+#: admin-settings.php
+msgid "reCAPTCHA v3 Secret Key"
+msgstr ""
+
+#: admin-settings.php
+msgid "Configure Emmie API Connection"
+msgstr ""
+
+#: admin-settings.php
+msgid "Welcome! Please enter your Emmie API credentials to begin using the plugin."
+msgstr ""
+
+#: admin-settings.php
+msgid "You can find your API credentials in your Emmie app under Settings > Inflow."
+msgstr ""
+
+#: admin-settings.php
+msgid "Save & Activate"
+msgstr ""
+
+#: admin-settings.php
+msgid "Save Changes"
+msgstr ""
+
+#: admin-settings.php
+msgid "API URL and Token are required"
+msgstr ""
+
+#: admin-settings.php
+msgid "Could not connect to the Emmie API: "
+msgstr ""
+
+#: admin-settings.php
+msgid "API token validation failed"
+msgstr ""
+
+#: admin-settings.php
+msgid "Please check whether your API URL is correct."
+msgstr ""
+
+#: admin-settings.php
+msgid "Please check your token."
+msgstr ""
+
+#: admin-settings.php
+msgid "API token validated successfully."
+msgstr ""
+
+#: admin-settings.php
+msgid "✅ API token validated successfully. The kennismaken page has been created:"
+msgstr ""
+
+#: form-handler.php
+msgid "The form is not available"
+msgstr ""
+
+#: form-handler.php
+msgid "First Name"
+msgstr ""
+
+#: form-handler.php
+msgid "Last Name"
+msgstr ""
+
+#: form-handler.php
+msgid "Email Address"
+msgstr ""
+
+#: form-handler.php
+msgid "Telephone Number"
+msgstr ""
+
+#: form-handler.php
+msgid "Street"
+msgstr ""
+
+#: form-handler.php
+msgid "House Number"
+msgstr ""
+
+#: form-handler.php
+msgid "Addition"
+msgstr ""
+
+#: form-handler.php
+msgid "Zipcode"
+msgstr ""
+
+#: form-handler.php
+msgid "City"
+msgstr ""
+
+#: form-handler.php
+msgid "Location"
+msgstr ""
+
+#: form-handler.php
+msgid "Select a location"
+msgstr ""
+
+#: form-handler.php
+msgid "Income Situation"
+msgstr ""
+
+#: form-handler.php
+msgid "Select income situation"
+msgstr ""
+
+#: form-handler.php
+msgid "Contact Preference"
+msgstr ""
+
+#: form-handler.php
+msgid "Select contact preference"
+msgstr ""
+
+#: form-handler.php
+msgid "I have a contact person"
+msgstr ""
+
+#: form-handler.php
+msgid "Contact First Name"
+msgstr ""
+
+#: form-handler.php
+msgid "Contact Last Name"
+msgstr ""
+
+#: form-handler.php
+msgid "Organisation"
+msgstr ""
+
+#: form-handler.php
+msgid "Contact Email"
+msgstr ""
+
+#: form-handler.php
+msgid "Contact Phone Number"
+msgstr ""
+
+#: form-handler.php
+msgid "The organisation may contact this person before the first meeting"
+msgstr ""
+
+#: form-handler.php
+msgid "How did you find us?"
+msgstr ""
+
+#: form-handler.php
+msgid "Select an option"
+msgstr ""
+
+#: form-handler.php
+msgid "Please specify"
+msgstr ""
+
+#: form-handler.php
+msgid "Documents"
+msgstr ""
+
+#: form-handler.php
+msgid "Allowed formats: doc, docx, rtf, xls, xlsx, txt, jpg, jpeg, png, pdf. Max 40MB per file."
+msgstr ""
+
+#: form-handler.php
+msgid "Comments"
+msgstr ""
+
+#: form-handler.php
+msgid "Personal Data"
+msgstr ""
+
+#: form-handler.php
+#, php-format
+msgid "By checking this box, you agree to the processing of your personal data according to the <a href=\"%s\" target=\"_blank\">privacy statement</a>"
+msgstr ""
+
+#: admin-settings.php
+#, php-format
+msgid "The intake form links to Emmie's privacy statement, because this site has none. Choose your own privacy statement under <a href=\"%s\">Settings &gt; Privacy</a>: the personal data from the form are yours."
+msgstr ""
+
+#: form-handler.php
+msgid "Submit"
+msgstr ""
+
+#: form-handler.php
+msgid "Security check failed. Please reload the page and try again."
+msgstr ""
+
+#: form-handler.php
+msgid "You must agree to share the submitted personal data"
+msgstr ""
+
+#: form-handler.php
+msgid "First Name is required"
+msgstr ""
+
+#: form-handler.php
+msgid "Last Name is required"
+msgstr ""
+
+#: form-handler.php
+msgid "Please enter a valid email address"
+msgstr ""
+
+#: form-handler.php
+msgid "Please enter a valid phone number"
+msgstr ""
+
+#: form-handler.php
+msgid "How did you find us:"
+msgstr ""
+
+#: form-handler.php
+msgid "Please complete the reCAPTCHA verification."
+msgstr ""
+
+#: form-handler.php
+msgid "reCAPTCHA verification failed. Please try again."
+msgstr ""
+
+#: form-handler.php
+msgid "Please correct the errors above before submitting."
+msgstr ""
+
+#: form-handler.php
+msgid "API not configured. Please contact support."
+msgstr ""
+
+#: form-handler.php
+msgid "Submission failed:"
+msgstr ""
+
+#: form-handler.php
+msgid "Thank you! Your information has been submitted."
+msgstr ""
+
+#: wp-emmie-plugin.php
+msgid "Something went wrong"
+msgstr ""
+
+#: wp-emmie-plugin.php
+msgid "Deactivate"
+msgstr ""
+
+#: wp-emmie-plugin.php
+msgid "Do you want to delete all WP to emmie Connector settings and data?"
+msgstr ""
+
+#: booking-form.php
+msgid "The booking form is not shown: enter a valid Emmie API URL and token in the plugin settings. Visitors see nothing here."
+msgstr ""
+
+#: form-handler.php
+msgid "Plan an introductory meeting"
+msgstr ""
+
+#: admin-settings.php
+msgid "Booking form"
+msgstr ""
+
+#: admin-settings.php
+msgid "Neutral base style from Emmie"
+msgstr ""
+
+#: admin-settings.php
+msgid "Without it, your theme styles the booking form of [emmie_kennismaking] entirely. A shortcode can choose per page with opmaak=\"basis\" or opmaak=\"geen\"."
+msgstr ""
