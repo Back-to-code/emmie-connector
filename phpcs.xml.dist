@@ -10,6 +10,7 @@
     <arg value="sp"/>
 
     <config name="testVersion" value="8.0-"/>
+    <config name="text_domain" value="wp-emmie-plugin"/>
 
     <rule ref="PHPCompatibilityWP"/>
 

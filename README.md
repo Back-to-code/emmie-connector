@@ -10,8 +10,8 @@ platform. It adds two things to the site:
 The organisation enters its Emmie API address and an API token under *Settings › WP Emmie Plugin*. Emmie shows both
 under *Instellingen › Instroom*. reCAPTCHA v3 keys are optional and protect the intake form against bots.
 
-The plugin is maintained by Emmie B.V. This repository is its source; `readme.txt` is the description WordPress
-shows to site owners.
+The plugin is maintained by Emmie B.V. This repository is its source; `readme.txt` is the description the plugin
+directory of WordPress.org shows.
 
 ## Requirements
 
