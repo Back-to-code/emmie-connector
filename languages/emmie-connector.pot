@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-09T11:58:52+00:00\n"
+"POT-Creation-Date: 2026-11-09T12:09:15+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: emmie-connector\n"
@@ -34,289 +34,294 @@ msgstr ""
 msgid "https://emmie.nl"
 msgstr ""
 
-#: admin-settings.php:37
+#: admin-settings.php:40
 msgid "Emmie API Settings"
 msgstr ""
 
-#: admin-settings.php:44
+#: admin-settings.php:47
 msgid "API URL"
 msgstr ""
 
-#: admin-settings.php:52
+#: admin-settings.php:55
 msgid "API Token"
 msgstr ""
 
-#: admin-settings.php:60
+#: admin-settings.php:63
 msgid "reCAPTCHA v3 Site Key"
 msgstr ""
 
-#: admin-settings.php:68
+#: admin-settings.php:71
 msgid "reCAPTCHA v3 Secret Key"
 msgstr ""
 
-#: admin-settings.php:76
+#: admin-settings.php:79
 msgid "Booking form"
 msgstr ""
 
-#: admin-settings.php:86
+#: admin-settings.php:88
 msgid "Neutral base style from Emmie"
 msgstr ""
 
-#: admin-settings.php:87
+#: admin-settings.php:89
 msgid "Without it, your theme styles the booking form of [emmie_kennismaking] entirely. A shortcode can choose per page with opmaak=\"basis\" or opmaak=\"geen\"."
 msgstr ""
 
-#: admin-settings.php:126
+#: admin-settings.php:130
 msgid "Configure Emmie API Connection"
 msgstr ""
 
-#: admin-settings.php:128
+#: admin-settings.php:132
 msgid "Welcome! Please enter your Emmie API credentials to begin using the plugin."
 msgstr ""
 
-#: admin-settings.php:129
+#: admin-settings.php:133
 msgid "You can find your API credentials in your Emmie app under Settings > Inflow."
 msgstr ""
 
 #. translators: %s: the address of the WordPress privacy settings
-#: admin-settings.php:134
+#: admin-settings.php:139
 #, php-format
 msgid "The intake form links to Emmie's privacy statement, because this site has none. Choose your own privacy statement under <a href=\"%s\">Settings &gt; Privacy</a>: the personal data from the form are yours."
 msgstr ""
 
-#: admin-settings.php:142
+#: admin-settings.php:149
 msgid "Save & Activate"
 msgstr ""
 
-#: admin-settings.php:142
+#: admin-settings.php:149
 msgid "Save Changes"
 msgstr ""
 
-#: admin-settings.php:181
+#: admin-settings.php:188
 msgid "API URL and Token are required"
 msgstr ""
 
-#: admin-settings.php:202
-msgid "Could not connect to the Emmie API: "
+#. translators: %s: the reason WordPress gives for the failed connection
+#: admin-settings.php:211
+#, php-format
+msgid "Could not connect to the Emmie API: %s"
 msgstr ""
 
-#: admin-settings.php:215
-msgid "API token validation failed . Please check whether your API URL is correct."
+#: admin-settings.php:226
+msgid "API token validation failed. Please check whether your API URL is correct."
 msgstr ""
 
-#: admin-settings.php:221
-msgid "API token validation failed (HTTP "
+#. translators: %d: the HTTP status code Emmie answered with
+#: admin-settings.php:234
+#, php-format
+msgid "API token validation failed (HTTP %d). Please check your token."
 msgstr ""
 
-#: admin-settings.php:227
+#: admin-settings.php:242
 msgid "API token validated successfully."
 msgstr ""
 
-#: admin-settings.php:252
-#: admin-settings.php:277
-msgid "✅ API token validated successfully. The kennismaken page has been created: <a href=\""
+#. translators: %s: a link to the page with the intake form
+#: admin-settings.php:303
+#, php-format
+msgid "API token validated successfully. The kennismaken page has been created: %s"
 msgstr ""
 
-#: booking-form.php:20
+#: booking-form.php:22
 msgid "The booking form is not shown: enter a valid Emmie API URL and token in the plugin settings. Visitors see nothing here."
 msgstr ""
 
-#: booking-form.php:30
-#: form-handler.php:367
+#: booking-form.php:34
+#: form-handler.php:334
 msgid "Plan an introductory meeting"
 msgstr ""
 
-#: emmie-connector.php:49
+#: emmie-connector.php:54
 msgid "Deactivate"
 msgstr ""
 
-#: emmie-connector.php:63
+#: emmie-connector.php:68
 msgid "Do you want to delete all Emmie Connector settings and data?"
 msgstr ""
 
-#: form-handler.php:53
+#: form-handler.php:70
 msgid "The form is not available"
 msgstr ""
 
-#: form-handler.php:109
+#: form-handler.php:101
 msgid "First Name"
 msgstr ""
 
-#: form-handler.php:118
+#: form-handler.php:110
 msgid "Last Name"
 msgstr ""
 
-#: form-handler.php:127
+#: form-handler.php:119
 msgid "Email Address"
 msgstr ""
 
-#: form-handler.php:136
+#: form-handler.php:128
 msgid "Telephone Number"
 msgstr ""
 
-#: form-handler.php:147
+#: form-handler.php:139
 msgid "Street"
 msgstr ""
 
-#: form-handler.php:151
+#: form-handler.php:143
 msgid "House Number"
 msgstr ""
 
-#: form-handler.php:155
+#: form-handler.php:147
 msgid "Addition"
 msgstr ""
 
-#: form-handler.php:159
+#: form-handler.php:151
 msgid "Zipcode"
 msgstr ""
 
-#: form-handler.php:163
+#: form-handler.php:155
 msgid "City"
 msgstr ""
 
-#: form-handler.php:171
+#: form-handler.php:163
 msgid "Which location are you interested in?"
 msgstr ""
 
-#: form-handler.php:173
+#: form-handler.php:165
 msgid "Select a location"
 msgstr ""
 
-#: form-handler.php:190
+#: form-handler.php:182
 msgid "Income Situation"
 msgstr ""
 
-#: form-handler.php:192
+#: form-handler.php:184
 msgid "Select income situation"
 msgstr ""
 
-#: form-handler.php:206
+#: form-handler.php:198
 msgid "Contact Preference"
 msgstr ""
 
-#: form-handler.php:208
+#: form-handler.php:200
 msgid "Select contact preference"
 msgstr ""
 
-#: form-handler.php:224
+#: form-handler.php:216
 msgid "Add contact person"
 msgstr ""
 
-#: form-handler.php:229
+#: form-handler.php:221
 msgid "Contact First Name"
 msgstr ""
 
-#: form-handler.php:233
+#: form-handler.php:225
 msgid "Contact Last Name"
 msgstr ""
 
-#: form-handler.php:237
+#: form-handler.php:229
 msgid "Organisation"
 msgstr ""
 
-#: form-handler.php:241
+#: form-handler.php:233
 msgid "Contact Email"
 msgstr ""
 
-#: form-handler.php:245
+#: form-handler.php:237
 msgid "Contact Phone Number"
 msgstr ""
 
-#: form-handler.php:251
+#: form-handler.php:243
 msgid "The organisation may contact this person before the first meeting"
 msgstr ""
 
-#: form-handler.php:261
+#: form-handler.php:253
 msgid "How did you find us?"
 msgstr ""
 
-#: form-handler.php:263
+#: form-handler.php:255
 msgid "Select an option"
 msgstr ""
 
-#: form-handler.php:272
+#: form-handler.php:264
 msgid "Please specify"
 msgstr ""
 
-#: form-handler.php:280
+#: form-handler.php:272
 msgid "Documents"
 msgstr ""
 
-#: form-handler.php:282
+#: form-handler.php:274
 msgid "Allowed formats: doc, docx, rtf, xls, xlsx, txt, jpg, jpeg, png, pdf. Max 40MB per file."
 msgstr ""
 
-#: form-handler.php:288
+#: form-handler.php:280
 msgid "Comments"
 msgstr ""
 
-#: form-handler.php:297
+#: form-handler.php:289
 msgid "Personal Data"
 msgstr ""
 
 #. translators: %s: the address of the privacy statement
-#: form-handler.php:304
+#: form-handler.php:297
 #, php-format
 msgid "By checking this box, you agree to the processing of your personal data according to the <a href=\"%s\" target=\"_blank\">privacy statement</a>"
 msgstr ""
 
-#: form-handler.php:322
-#: form-handler.php:330
+#: form-handler.php:311
+#: form-handler.php:319
 msgid "Submit"
 msgstr ""
 
-#: form-handler.php:381
+#: form-handler.php:355
 msgid "Security check failed. Please reload the page and try again."
 msgstr ""
 
-#: form-handler.php:387
+#: form-handler.php:389
 msgid "You must agree to share the submitted personal data"
 msgstr ""
 
-#: form-handler.php:398
+#: form-handler.php:392
 msgid "First Name is required"
 msgstr ""
 
-#: form-handler.php:401
+#: form-handler.php:395
 msgid "Last Name is required"
 msgstr ""
 
-#: form-handler.php:404
+#: form-handler.php:398
 msgid "Please enter a valid email address"
 msgstr ""
 
-#: form-handler.php:407
+#: form-handler.php:401
 msgid "Please enter a valid phone number"
 msgstr ""
 
-#: form-handler.php:412
+#: form-handler.php:404
 msgid "Location is required"
 msgstr ""
 
-#: form-handler.php:442
+#: form-handler.php:414
 msgid "How did you find us:"
 msgstr ""
 
-#: form-handler.php:450
+#: form-handler.php:422
 msgid "Please complete the reCAPTCHA verification."
 msgstr ""
 
-#: form-handler.php:463
+#: form-handler.php:435
 msgid "reCAPTCHA verification failed. Please try again."
 msgstr ""
 
-#: form-handler.php:472
+#: form-handler.php:445
 msgid "Please correct the errors above before submitting."
 msgstr ""
 
-#: form-handler.php:482
+#: form-handler.php:458
 msgid "API not configured. Please contact support."
 msgstr ""
 
-#: form-handler.php:599
+#: form-handler.php:573
 msgid "Submission failed:"
 msgstr ""
 
-#: form-handler.php:605
+#: form-handler.php:582
 msgid "Thank you! Your information has been submitted."
 msgstr ""

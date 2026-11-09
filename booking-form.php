@@ -2,6 +2,8 @@
 
 declare(strict_types = 1);
 
+\defined('ABSPATH') || exit;
+
 add_shortcode('emmie_kennismaking', 'wp2emmie_render_booking_form');
 
 /**
@@ -23,6 +25,8 @@ function wp2emmie_render_booking_form(array|string $atts = []): string
 
     $base_style = $atts['opmaak'] === '' ? (bool) get_option('wp2emmie_booking_base_style') : $atts['opmaak'] === 'basis';
 
+    // Emmie serves its own widget, and its version follows Emmie, not this plugin.
+    // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
     wp_enqueue_script('wp2emmie-kennismaking', $origin . '/kennismaking/widget.js', [], null, ['strategy' => 'async', 'in_footer' => true]);
 
     // The script replaces the link with the form; when the script cannot load, the visitor still reaches Emmie's booking page.

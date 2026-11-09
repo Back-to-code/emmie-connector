@@ -2,20 +2,26 @@
 
 declare(strict_types = 1);
 
-add_action('http_api_debug', function($response, $type, $class, $args, $url): void {
-    if ($type !== 'response') {
-        return;
-    }
+\defined('ABSPATH') || exit;
 
-    $timestamp = date('Y-m-d H:i:s');
+add_action('http_api_debug', function($response, $context, $transport, $args, $url): void {
+    $emmie_origin = wp2emmie_emmie_origin();
 
-    if (is_wp_error($response)) {
-        $error_msg = $response->get_error_message();
-        error_log("[{$timestamp}] HTTP API Error: {$error_msg} | URL: {$url}");
-
-        return;
+    if ($context === 'response' && is_wp_error($response) && $emmie_origin !== '' && str_starts_with((string) $url, $emmie_origin)) {
+        wp2emmie_log('HTTP API Error: ' . $response->get_error_message() . ' | URL: ' . $url);
     }
 }, 10, 5);
+
+/**
+ * Writes to the PHP error log, only while WP_DEBUG is on.
+ */
+function wp2emmie_log(string $message): void
+{
+    if (\defined('WP_DEBUG') && WP_DEBUG) {
+        // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+        error_log('[Emmie Connector] ' . $message);
+    }
+}
 
 /**
  * The organisation's own Emmie, from the plugin's API URL. Emmie's Instroom page offers that URL with /api, while the
@@ -32,5 +38,7 @@ function wp2emmie_emmie_origin(): string
  */
 function wp2emmie_privacy_policy_url(): string
 {
-    return get_privacy_policy_url() ?: 'https://emmie.nl/privacy';
+    $url = get_privacy_policy_url();
+
+    return $url !== '' ? $url : 'https://emmie.nl/privacy';
 }

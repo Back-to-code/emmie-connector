@@ -66,6 +66,10 @@ The plugin asks whether to delete its settings and data. If you choose OK, it de
 
 The privacy statement of your site, as set under Settings › Privacy. The personal data from the form are yours. Only while your site has none, the form links to Emmie's privacy statement.
 
+= How do I see why a form did not reach Emmie? =
+
+Turn on `WP_DEBUG` and `WP_DEBUG_LOG` in `wp-config.php`. The plugin then writes each failed call to Emmie to `wp-content/debug.log`.
+
 = Where is the API token kept? =
 
 In the WordPress database. When PHP has the OpenSSL extension, as nearly every host has, it is encrypted with the keys from your `wp-config.php`.
@@ -100,6 +104,8 @@ Google reCAPTCHA is provided by Google: [terms of service](https://policies.goog
 * The plugin is now called Emmie Connector, and comes from the WordPress.org plugin directory.
 * The API address works with and without `/api` at the end, as Emmie shows it.
 * Adding a WordPress user no longer ends in a critical error.
+* A form that could not reach Emmie no longer says it was sent.
+* After a mistake in the form, the chosen location and options stay selected.
 
 = 1.3.0 =
 * The booking form for introductory meetings, with the shortcode `[emmie_kennismaking]`.

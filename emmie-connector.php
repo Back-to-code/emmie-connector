@@ -15,6 +15,9 @@
 
 \defined('ABSPATH') || exit;
 
+\define('WP2EMMIE_VERSION', '1.4.0');
+\define('WP2EMMIE_PLUGIN_FILE', __FILE__);
+
 require_once plugin_dir_path(__FILE__) . 'functions.php';
 require_once plugin_dir_path(__FILE__) . 'admin-settings.php';
 require_once plugin_dir_path(__FILE__) . 'form-handler.php';
@@ -35,6 +38,8 @@ function wp2emmie_redirect_after_activation(): void
 {
     if (get_option('wp2emmie_do_activation_redirect', false)) {
         delete_option('wp2emmie_do_activation_redirect');
+        // Only whether WordPress activated several plugins at once; nothing is read from it.
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if (!isset($_GET['activate-multi'])) {
             wp_safe_redirect(admin_url('options-general.php?page=wp2emmie_connector&setup=1'));
             exit;
@@ -46,39 +51,31 @@ add_filter('plugin_action_links_' . plugin_basename(__FILE__), function($links) 
     // Add a data attribute we’ll hook with JS
     $deactivate_link = admin_url('plugins.php?action=deactivate&plugin=' . plugin_basename(__FILE__) . '&plugin_status=all&paged=1&_wpnonce=' . wp_create_nonce('deactivate-plugin_' . plugin_basename(__FILE__)));
 
-    $custom = '<a href="#" class="wp2emmie-deactivate" data-deactivate-url="' . esc_url($deactivate_link) . '">' . __('Deactivate', 'emmie-connector') . ' </a>';
+    $custom = '<a href="#" class="wp2emmie-deactivate" data-deactivate-url="' . esc_url($deactivate_link) . '">' . esc_html__('Deactivate', 'emmie-connector') . ' </a>';
     $links['deactivate'] = $custom;
 
     return $links;
 });
 
-add_action('admin_footer-plugins.php', function(): void {
-    ?>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.wp2emmie-deactivate').forEach(function(el) {
-                el.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const deactivateUrl = el.dataset.deactivateUrl;
-                    const confirmed = confirm(<?= wp_json_encode(__('Do you want to delete all Emmie Connector settings and data?', 'emmie-connector')); ?>);
+add_action('admin_enqueue_scripts', function(string $hook_suffix): void {
+    if ($hook_suffix !== 'plugins.php') {
+        return;
+    }
 
-                    if (confirmed) {
-                        window.location.href = deactivateUrl + '&wp2emmie_delete=1';
-                    } else {
-                        window.location.href = deactivateUrl;
-                    }
-                });
-            });
-        });
-    </script>
-<?php
+    wp_enqueue_script('wp2emmie-plugins-page', plugins_url('assets/js/plugins-page.js', __FILE__), [], WP2EMMIE_VERSION, ['in_footer' => true]);
+    wp_add_inline_script(
+        'wp2emmie-plugins-page',
+        'var wp2emmiePluginsPage = ' . wp_json_encode(['confirmDelete' => __('Do you want to delete all Emmie Connector settings and data?', 'emmie-connector')]) . ';',
+        'before',
+    );
 });
 
 add_action('admin_init', function(): void {
     if (
-        isset($_GET['action'], $_GET['plugin'], $_GET['wp2emmie_delete'])
-        && $_GET['action'] === 'deactivate'
-        && $_GET['plugin'] === plugin_basename(__FILE__)
+        isset($_GET['action'], $_GET['plugin'], $_GET['wp2emmie_delete'], $_GET['_wpnonce'])
+        && wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'deactivate-plugin_' . plugin_basename(__FILE__))
+        && sanitize_text_field(wp_unslash($_GET['action'])) === 'deactivate'
+        && sanitize_text_field(wp_unslash($_GET['plugin'])) === plugin_basename(__FILE__)
         && current_user_can('activate_plugins')
     ) {
         // Delete all settings
