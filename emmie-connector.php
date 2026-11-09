@@ -51,7 +51,7 @@ add_filter('plugin_action_links_' . plugin_basename(__FILE__), function($links) 
     // Add a data attribute we’ll hook with JS
     $deactivate_link = admin_url('plugins.php?action=deactivate&plugin=' . plugin_basename(__FILE__) . '&plugin_status=all&paged=1&_wpnonce=' . wp_create_nonce('deactivate-plugin_' . plugin_basename(__FILE__)));
 
-    $custom = '<a href="#" class="wp2emmie-deactivate" data-deactivate-url="' . esc_url($deactivate_link) . '">' . esc_html__('Deactivate', 'emmie-connector') . ' </a>';
+    $custom = '<a href="' . esc_url($deactivate_link) . '" class="wp2emmie-deactivate" data-deactivate-url="' . esc_url($deactivate_link) . '">' . esc_html__('Deactivate', 'emmie-connector') . ' </a>';
     $links['deactivate'] = $custom;
 
     return $links;
@@ -65,7 +65,7 @@ add_action('admin_enqueue_scripts', function(string $hook_suffix): void {
     wp_enqueue_script('wp2emmie-plugins-page', plugins_url('assets/js/plugins-page.js', __FILE__), [], WP2EMMIE_VERSION, ['in_footer' => true]);
     wp_add_inline_script(
         'wp2emmie-plugins-page',
-        'var wp2emmiePluginsPage = ' . wp_json_encode(['confirmDelete' => __('Do you want to delete all Emmie Connector settings and data?', 'emmie-connector')]) . ';',
+        'var wp2emmiePluginsPage = ' . wp_json_encode(['confirmDelete' => __('Do you also want to delete the settings of Emmie Connector, and move the pages with its intake form to the trash?', 'emmie-connector')]) . ';',
         'before',
     );
 });
@@ -87,7 +87,7 @@ add_action('admin_init', function(): void {
         delete_option('wp2emmie_token_is_valid');
         delete_option('wp2emmie_form_page_created');
 
-        // Find and delete any page containing the [wp2emmie_form] shortcode
+        // Every page with the intake form goes to the trash, where the site owner can still restore it.
         $pages_with_shortcode = get_posts([
             'post_type' => 'page',
             'posts_per_page' => -1,
@@ -99,7 +99,7 @@ add_action('admin_init', function(): void {
         if (!empty($pages_with_shortcode)) {
             foreach ($pages_with_shortcode as $page_post) {
                 if (!empty($page_post->post_content) && has_shortcode($page_post->post_content, 'wp2emmie_form')) {
-                    wp_delete_post($page_post->ID, true);
+                    wp_trash_post($page_post->ID);
                 }
             }
         }

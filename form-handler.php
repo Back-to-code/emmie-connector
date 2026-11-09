@@ -78,11 +78,18 @@ function wp2emmie_render_form(): string
 
     $options = wp2emmie_get_intake_options();
 
+    // A cached copy of this page would carry a nonce that has expired, and every visitor's submission would fail.
+    // DONOTCACHEPAGE is the name page-caching plugins read, so it cannot carry this plugin's prefix.
+    if (!\defined('DONOTCACHEPAGE')) {
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound
+        \define('DONOTCACHEPAGE', true);
+    }
+
     // Process submission first so we know whether to prefill or clear values. This only detects a submission:
     // wp2emmie_process_form() verifies the nonce before it reads any field.
     $submission_result = null;
     // phpcs:ignore WordPress.Security.NonceVerification.Missing
-    if (isset($_SERVER['REQUEST_METHOD'], $_POST['emmie_form_nonce']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['emmie_form_nonce'])) {
         $submission_result = wp2emmie_process_form();
     }
     $submission_success = $submission_result !== null && $submission_result['success'];
@@ -361,7 +368,7 @@ function wp2emmie_process_form(): array
     $values = [
         'client_first_name' => isset($_POST['client_first_name']) ? sanitize_text_field(wp_unslash($_POST['client_first_name'])) : '',
         'client_last_name' => isset($_POST['client_last_name']) ? sanitize_text_field(wp_unslash($_POST['client_last_name'])) : '',
-        'client_email' => isset($_POST['client_email']) ? sanitize_email(wp_unslash($_POST['client_email'])) : '',
+        'client_email' => isset($_POST['client_email']) ? sanitize_text_field(wp_unslash($_POST['client_email'])) : '',
         'client_phone_number' => isset($_POST['client_phone_number']) ? sanitize_text_field(wp_unslash($_POST['client_phone_number'])) : '',
         'client_comment' => isset($_POST['client_comment']) ? sanitize_textarea_field(wp_unslash($_POST['client_comment'])) : '',
         'client_location_id' => isset($_POST['client_location_id']) ? sanitize_text_field(wp_unslash($_POST['client_location_id'])) : '',
@@ -376,7 +383,7 @@ function wp2emmie_process_form(): array
         'contact_first_name' => $has_contact && isset($_POST['contact_first_name']) ? sanitize_text_field(wp_unslash($_POST['contact_first_name'])) : '',
         'contact_last_name' => $has_contact && isset($_POST['contact_last_name']) ? sanitize_text_field(wp_unslash($_POST['contact_last_name'])) : '',
         'contact_organisation' => $has_contact && isset($_POST['contact_organisation']) ? sanitize_text_field(wp_unslash($_POST['contact_organisation'])) : '',
-        'contact_email' => $has_contact && isset($_POST['contact_email']) ? sanitize_email(wp_unslash($_POST['contact_email'])) : '',
+        'contact_email' => $has_contact && isset($_POST['contact_email']) ? sanitize_text_field(wp_unslash($_POST['contact_email'])) : '',
         'contact_phone_number' => $has_contact && isset($_POST['contact_phone_number']) ? sanitize_text_field(wp_unslash($_POST['contact_phone_number'])) : '',
         'contact_may_contact_before_intake' => $has_contact && isset($_POST['contact_may_contact_before_intake']) ? '1' : '',
         'client_referral_source' => isset($_POST['client_referral_source']) ? sanitize_text_field(wp_unslash($_POST['client_referral_source'])) : '',
@@ -394,7 +401,9 @@ function wp2emmie_process_form(): array
     if ($values['client_last_name'] === '') {
         $errors['client_last_name'] = __('Last Name is required', 'emmie-connector');
     }
-    if ($values['client_email'] === '' || !is_email($values['client_email'])) {
+    // The form refills with what the visitor typed; Emmie gets the address only in its sanitised form.
+    $email = sanitize_email($values['client_email']);
+    if ($email === '' || !is_email($email)) {
         $errors['client_email'] = __('Please enter a valid email address', 'emmie-connector');
     }
     if ($values['client_phone_number'] === '') {
@@ -471,7 +480,7 @@ function wp2emmie_process_form(): array
     $fields = [
         'first_name' => $values['client_first_name'],
         'last_name' => $values['client_last_name'],
-        'email' => $values['client_email'],
+        'email' => $email,
         'phone_number' => $values['client_phone_number'],
         'comment' => $comment,
     ];
@@ -497,7 +506,11 @@ function wp2emmie_process_form(): array
     if ($has_contact && $values['contact_first_name'] !== '' && $values['contact_last_name'] !== '') {
         $fields['contact_first_name'] = $values['contact_first_name'];
         $fields['contact_last_name'] = $values['contact_last_name'];
-        foreach (['contact_organisation', 'contact_email', 'contact_phone_number'] as $name) {
+        $contact_email = sanitize_email($values['contact_email']);
+        if ($contact_email !== '') {
+            $fields['contact_email'] = $contact_email;
+        }
+        foreach (['contact_organisation', 'contact_phone_number'] as $name) {
             if ($values[$name] !== '') {
                 $fields[$name] = $values[$name];
             }

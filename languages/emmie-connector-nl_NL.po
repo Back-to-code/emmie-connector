@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Emmie Connector 1.4.0\n"
 "Report-Msgid-Bugs-To: https://github.com/Back-to-code/emmie-connector/"
 "issues\n"
-"POT-Creation-Date: 2026-11-09T12:09:15+00:00\n"
+"POT-Creation-Date: 2026-11-09T12:23:10+00:00\n"
 "PO-Revision-Date: 2026-04-10 12:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -136,7 +136,9 @@ msgstr ""
 #: admin-settings.php:234
 #, php-format
 msgid "API token validation failed (HTTP %d). Please check your token."
-msgstr "Controle van het API-token mislukt (HTTP %d). Controleer alstublieft uw token."
+msgstr ""
+"Controle van het API-token mislukt (HTTP %d). Controleer alstublieft uw "
+"token."
 
 #: admin-settings.php:242
 msgid "API token validated successfully."
@@ -147,8 +149,7 @@ msgstr "API Token succesvol gevalideerd."
 #, php-format
 msgid ""
 "API token validated successfully. The kennismaken page has been created: %s"
-msgstr ""
-"API-token gecontroleerd. De pagina \"kennismaken\" is aangemaakt: %s"
+msgstr "API-token gecontroleerd. De pagina \"kennismaken\" is aangemaakt: %s"
 
 #: booking-form.php:22
 msgid ""
@@ -158,7 +159,7 @@ msgstr ""
 "Het boekformulier wordt niet getoond: vul een geldige Emmie API URL en token "
 "in bij de instellingen van de plugin. Bezoekers zien hier niets."
 
-#: booking-form.php:34 form-handler.php:334
+#: booking-form.php:34 form-handler.php:339
 msgid "Plan an introductory meeting"
 msgstr "Plan een kennismakingsgesprek"
 
@@ -167,119 +168,123 @@ msgid "Deactivate"
 msgstr "Deactiveren"
 
 #: emmie-connector.php:68
-msgid "Do you want to delete all Emmie Connector settings and data?"
-msgstr "Wilt u alle instellingen en gegevens van Emmie Connector verwijderen?"
+msgid ""
+"Do you also want to delete the settings of Emmie Connector, and move the "
+"pages with its intake form to the trash?"
+msgstr ""
+"Wilt u ook de instellingen van Emmie Connector verwijderen, en de pagina's met "
+"het aanmeldformulier naar de prullenbak verplaatsen?"
 
 #: form-handler.php:70
 msgid "The form is not available"
 msgstr "Het formulier is niet beschikbaar"
 
-#: form-handler.php:101
+#: form-handler.php:106
 msgid "First Name"
 msgstr "Voornaam"
 
-#: form-handler.php:110
+#: form-handler.php:115
 msgid "Last Name"
 msgstr "Achternaam"
 
-#: form-handler.php:119
+#: form-handler.php:124
 msgid "Email Address"
 msgstr "E-mailadres"
 
-#: form-handler.php:128
+#: form-handler.php:133
 msgid "Telephone Number"
 msgstr "Telefoonnummer"
 
-#: form-handler.php:139
+#: form-handler.php:144
 msgid "Street"
 msgstr "Straat"
 
-#: form-handler.php:143
+#: form-handler.php:148
 msgid "House Number"
 msgstr "Huisnummer"
 
-#: form-handler.php:147
+#: form-handler.php:152
 msgid "Addition"
 msgstr "Toevoeging"
 
-#: form-handler.php:151
+#: form-handler.php:156
 msgid "Zipcode"
 msgstr "Postcode"
 
-#: form-handler.php:155
+#: form-handler.php:160
 msgid "City"
 msgstr "Plaats"
 
-#: form-handler.php:163
+#: form-handler.php:168
 msgid "Which location are you interested in?"
 msgstr "Voor welke locatie heeft u interesse?"
 
-#: form-handler.php:165
+#: form-handler.php:170
 msgid "Select a location"
 msgstr "Selecteer een locatie"
 
-#: form-handler.php:182
+#: form-handler.php:187
 msgid "Income Situation"
 msgstr "Inkomenssituatie"
 
-#: form-handler.php:184
+#: form-handler.php:189
 msgid "Select income situation"
 msgstr "Selecteer inkomenssituatie"
 
-#: form-handler.php:198
+#: form-handler.php:203
 msgid "Contact Preference"
 msgstr "Contactvoorkeur"
 
-#: form-handler.php:200
+#: form-handler.php:205
 msgid "Select contact preference"
 msgstr "Selecteer contactvoorkeur"
 
-#: form-handler.php:216
+#: form-handler.php:221
 msgid "Add contact person"
 msgstr "Begeleider of contactpersoon toevoegen"
 
-#: form-handler.php:221
+#: form-handler.php:226
 msgid "Contact First Name"
 msgstr "Voornaam contactpersoon"
 
-#: form-handler.php:225
+#: form-handler.php:230
 msgid "Contact Last Name"
 msgstr "Achternaam contactpersoon"
 
-#: form-handler.php:229
+#: form-handler.php:234
 msgid "Organisation"
 msgstr "Organisatie"
 
-#: form-handler.php:233
+#: form-handler.php:238
 msgid "Contact Email"
 msgstr "E-mailadres contactpersoon"
 
-#: form-handler.php:237
+#: form-handler.php:242
 msgid "Contact Phone Number"
 msgstr "Telefoonnummer contactpersoon"
 
-#: form-handler.php:243
+#: form-handler.php:248
 msgid "The organisation may contact this person before the first meeting"
 msgstr ""
 "De organisatie mag contact opnemen met deze persoon vóór het eerste gesprek"
 
-#: form-handler.php:253
+#: form-handler.php:258
 msgid "How did you find us?"
 msgstr "Hoe heeft u ons gevonden?"
 
-#: form-handler.php:255
+#: form-handler.php:260
 msgid "Select an option"
 msgstr "Selecteer een optie"
 
-#: form-handler.php:264
+#: form-handler.php:269
 msgid "Please specify"
 msgstr "Geef aan"
 
-#: form-handler.php:272
+#: form-handler.php:277
 msgid "Documents"
 msgstr "Documenten"
 
-#: form-handler.php:274
+#: form-handler.php:279
 msgid ""
 "Allowed formats: doc, docx, rtf, xls, xlsx, txt, jpg, jpeg, png, pdf. Max "
 "40MB per file."
@@ -287,16 +292,16 @@ msgstr ""
 "Toegestane formaten: doc, docx, rtf, xls, xlsx, txt, jpg, jpeg, png, pdf. "
 "Maximaal 40MB per bestand."
 
-#: form-handler.php:280
+#: form-handler.php:285
 msgid "Comments"
 msgstr "Opmerkingen"
 
-#: form-handler.php:289
+#: form-handler.php:294
 msgid "Personal Data"
 msgstr "Persoonsgegevens"
 
 #. translators: %s: the address of the privacy statement
-#: form-handler.php:297
+#: form-handler.php:302
 #, php-format
 msgid ""
 "By checking this box, you agree to the processing of your personal data "
@@ -306,64 +311,64 @@ msgstr ""
 "persoonsgegevens volgens de <a href=\"%s\" "
 "target=\"_blank\">privacyverklaring</a>"
 
-#: form-handler.php:311 form-handler.php:319
+#: form-handler.php:316 form-handler.php:324
 msgid "Submit"
 msgstr "Verzenden"
 
-#: form-handler.php:355
+#: form-handler.php:360
 msgid "Security check failed. Please reload the page and try again."
 msgstr ""
 "Beveiligingscontrole mislukt. Laad de pagina opnieuw en probeer het nog eens."
 
-#: form-handler.php:389
+#: form-handler.php:394
 msgid "You must agree to share the submitted personal data"
 msgstr "U moet akkoord gaan met de verwerking van uw persoonsgegevens"
 
-#: form-handler.php:392
+#: form-handler.php:397
 msgid "First Name is required"
 msgstr "Voornaam is verplicht"
 
-#: form-handler.php:395
+#: form-handler.php:400
 msgid "Last Name is required"
 msgstr "Achternaam is verplicht"
 
-#: form-handler.php:398
+#: form-handler.php:405
 msgid "Please enter a valid email address"
 msgstr "Vul een geldig e-mailadres in"
 
-#: form-handler.php:401
+#: form-handler.php:408
 msgid "Please enter a valid phone number"
 msgstr "Vul een geldig telefoonnummer in"
 
-#: form-handler.php:404
+#: form-handler.php:411
 msgid "Location is required"
 msgstr "Locatie is verplicht"
 
-#: form-handler.php:414
+#: form-handler.php:421
 msgid "How did you find us:"
 msgstr "Hoe bij ons terechtgekomen:"
 
-#: form-handler.php:422
+#: form-handler.php:429
 msgid "Please complete the reCAPTCHA verification."
 msgstr "Bevestig alstublieft de reCAPTCHA verificatie."
 
-#: form-handler.php:435
+#: form-handler.php:442
 msgid "reCAPTCHA verification failed. Please try again."
 msgstr "reCAPTCHA verificatie mislukt."
 
-#: form-handler.php:445
+#: form-handler.php:452
 msgid "Please correct the errors above before submitting."
 msgstr ""
 "Verbeter alstublieft de fouten in het formulier voordat u op Verzenden klikt."
 
-#: form-handler.php:458
+#: form-handler.php:465
 msgid "API not configured. Please contact support."
 msgstr "API niet ingesteld. Neem alstublieft contact op met de beheerder."
 
-#: form-handler.php:573
+#: form-handler.php:584
 msgid "Submission failed:"
 msgstr "Verzending mislukt:"
 
-#: form-handler.php:582
+#: form-handler.php:593
 msgid "Thank you! Your information has been submitted."
 msgstr "Bedankt! Uw gegevens zijn verstuurd."

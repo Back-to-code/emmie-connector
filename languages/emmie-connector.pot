@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-09T12:09:15+00:00\n"
+"POT-Creation-Date: 2026-11-09T12:23:10+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: emmie-connector\n"
@@ -127,7 +127,7 @@ msgid "The booking form is not shown: enter a valid Emmie API URL and token in t
 msgstr ""
 
 #: booking-form.php:34
-#: form-handler.php:334
+#: form-handler.php:339
 msgid "Plan an introductory meeting"
 msgstr ""
 
@@ -136,192 +136,192 @@ msgid "Deactivate"
 msgstr ""
 
 #: emmie-connector.php:68
-msgid "Do you want to delete all Emmie Connector settings and data?"
+msgid "Do you also want to delete the settings of Emmie Connector, and move the pages with its intake form to the trash?"
 msgstr ""
 
 #: form-handler.php:70
 msgid "The form is not available"
 msgstr ""
 
-#: form-handler.php:101
+#: form-handler.php:106
 msgid "First Name"
 msgstr ""
 
-#: form-handler.php:110
+#: form-handler.php:115
 msgid "Last Name"
 msgstr ""
 
-#: form-handler.php:119
+#: form-handler.php:124
 msgid "Email Address"
 msgstr ""
 
-#: form-handler.php:128
+#: form-handler.php:133
 msgid "Telephone Number"
 msgstr ""
 
-#: form-handler.php:139
+#: form-handler.php:144
 msgid "Street"
 msgstr ""
 
-#: form-handler.php:143
+#: form-handler.php:148
 msgid "House Number"
 msgstr ""
 
-#: form-handler.php:147
+#: form-handler.php:152
 msgid "Addition"
 msgstr ""
 
-#: form-handler.php:151
+#: form-handler.php:156
 msgid "Zipcode"
 msgstr ""
 
-#: form-handler.php:155
+#: form-handler.php:160
 msgid "City"
 msgstr ""
 
-#: form-handler.php:163
+#: form-handler.php:168
 msgid "Which location are you interested in?"
 msgstr ""
 
-#: form-handler.php:165
+#: form-handler.php:170
 msgid "Select a location"
 msgstr ""
 
-#: form-handler.php:182
+#: form-handler.php:187
 msgid "Income Situation"
 msgstr ""
 
-#: form-handler.php:184
+#: form-handler.php:189
 msgid "Select income situation"
 msgstr ""
 
-#: form-handler.php:198
+#: form-handler.php:203
 msgid "Contact Preference"
 msgstr ""
 
-#: form-handler.php:200
+#: form-handler.php:205
 msgid "Select contact preference"
 msgstr ""
 
-#: form-handler.php:216
+#: form-handler.php:221
 msgid "Add contact person"
 msgstr ""
 
-#: form-handler.php:221
+#: form-handler.php:226
 msgid "Contact First Name"
 msgstr ""
 
-#: form-handler.php:225
+#: form-handler.php:230
 msgid "Contact Last Name"
 msgstr ""
 
-#: form-handler.php:229
+#: form-handler.php:234
 msgid "Organisation"
 msgstr ""
 
-#: form-handler.php:233
+#: form-handler.php:238
 msgid "Contact Email"
 msgstr ""
 
-#: form-handler.php:237
+#: form-handler.php:242
 msgid "Contact Phone Number"
 msgstr ""
 
-#: form-handler.php:243
+#: form-handler.php:248
 msgid "The organisation may contact this person before the first meeting"
 msgstr ""
 
-#: form-handler.php:253
+#: form-handler.php:258
 msgid "How did you find us?"
 msgstr ""
 
-#: form-handler.php:255
+#: form-handler.php:260
 msgid "Select an option"
 msgstr ""
 
-#: form-handler.php:264
+#: form-handler.php:269
 msgid "Please specify"
 msgstr ""
 
-#: form-handler.php:272
+#: form-handler.php:277
 msgid "Documents"
 msgstr ""
 
-#: form-handler.php:274
+#: form-handler.php:279
 msgid "Allowed formats: doc, docx, rtf, xls, xlsx, txt, jpg, jpeg, png, pdf. Max 40MB per file."
 msgstr ""
 
-#: form-handler.php:280
+#: form-handler.php:285
 msgid "Comments"
 msgstr ""
 
-#: form-handler.php:289
+#: form-handler.php:294
 msgid "Personal Data"
 msgstr ""
 
 #. translators: %s: the address of the privacy statement
-#: form-handler.php:297
+#: form-handler.php:302
 #, php-format
 msgid "By checking this box, you agree to the processing of your personal data according to the <a href=\"%s\" target=\"_blank\">privacy statement</a>"
 msgstr ""
 
-#: form-handler.php:311
-#: form-handler.php:319
+#: form-handler.php:316
+#: form-handler.php:324
 msgid "Submit"
 msgstr ""
 
-#: form-handler.php:355
+#: form-handler.php:360
 msgid "Security check failed. Please reload the page and try again."
 msgstr ""
 
-#: form-handler.php:389
+#: form-handler.php:394
 msgid "You must agree to share the submitted personal data"
 msgstr ""
 
-#: form-handler.php:392
+#: form-handler.php:397
 msgid "First Name is required"
 msgstr ""
 
-#: form-handler.php:395
+#: form-handler.php:400
 msgid "Last Name is required"
 msgstr ""
 
-#: form-handler.php:398
+#: form-handler.php:405
 msgid "Please enter a valid email address"
 msgstr ""
 
-#: form-handler.php:401
+#: form-handler.php:408
 msgid "Please enter a valid phone number"
 msgstr ""
 
-#: form-handler.php:404
+#: form-handler.php:411
 msgid "Location is required"
 msgstr ""
 
-#: form-handler.php:414
+#: form-handler.php:421
 msgid "How did you find us:"
 msgstr ""
 
-#: form-handler.php:422
+#: form-handler.php:429
 msgid "Please complete the reCAPTCHA verification."
 msgstr ""
 
-#: form-handler.php:435
+#: form-handler.php:442
 msgid "reCAPTCHA verification failed. Please try again."
 msgstr ""
 
-#: form-handler.php:445
+#: form-handler.php:452
 msgid "Please correct the errors above before submitting."
 msgstr ""
 
-#: form-handler.php:458
+#: form-handler.php:465
 msgid "API not configured. Please contact support."
 msgstr ""
 
-#: form-handler.php:573
+#: form-handler.php:584
 msgid "Submission failed:"
 msgstr ""
 
-#: form-handler.php:582
+#: form-handler.php:593
 msgid "Thank you! Your information has been submitted."
 msgstr ""
