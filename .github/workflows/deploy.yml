@@ -1,0 +1,50 @@
+name: Deploy to WordPress.org
+
+# A tag vX.Y.Z publishes that version to the plugin directory. Without the
+# SVN_PASSWORD secret the workflow skips the deploy and says so.
+on:
+  push:
+    tags: ['v[0-9]+.[0-9]+.[0-9]+']
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Publish to the plugin directory
+    runs-on: ubuntu-latest
+    env:
+      SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+    steps:
+      - name: Check that the SVN password is set
+        id: secret
+        run: |
+          if [ -z "$SVN_PASSWORD" ]; then
+            echo "::warning::SVN_PASSWORD is not set on this repository, so nothing was published. Set it after WordPress.org approves the plugin, then run this workflow again."
+            echo "present=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        if: steps.secret.outputs.present == 'true'
+
+      - name: Check that the tag matches Stable tag and the plugin header
+        if: steps.secret.outputs.present == 'true'
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          stable=$(sed -n 's/^Stable tag:[[:space:]]*//p' readme.txt | tr -d '\r')
+          header=$(sed -n 's/^[[:space:]*]*Version:[[:space:]]*//p' emmie-connector.php | head -1 | tr -d '\r')
+          if [ "$stable" != "$version" ] || [ "$header" != "$version" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME, Stable tag '$stable' and plugin header version '$header' must be the same."
+            exit 1
+          fi
+
+      - name: Deploy to WordPress.org
+        if: steps.secret.outputs.present == 'true'
+        uses: 10up/action-wordpress-plugin-deploy@54bd289b8525fd23a5c365ec369185f2966529c2 # 2.3.0
+        env:
+          SVN_USERNAME: emmieapp
+          SLUG: emmie-connector
+          # Icon, banner and screenshots for the plugin page live here, outside the plugin itself.
+          ASSETS_DIR: .wordpress-org
