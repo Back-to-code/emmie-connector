@@ -54,3 +54,16 @@ docker compose -f docker-compose.test.yml down -v
 ## License
 
 GPL-2.0-or-later. See [LICENSE](LICENSE).
+
+## Releasing
+
+A tag publishes a version to the plugin directory of WordPress.org; nobody uses SVN by hand.
+
+1. Raise `Version` in the header of `emmie-connector.php` and `Stable tag` in `readme.txt` to the same number, and add
+   the changes to the changelog in `readme.txt`.
+2. Merge that to `main`, then tag it: `git tag v1.4.1 && git push origin v1.4.1`.
+3. The workflow *Deploy to WordPress.org* checks that the tag, `Stable tag` and the header agree, and publishes.
+
+The workflow publishes as `emmieapp` and needs the repository secret `SVN_PASSWORD` (the password of that account on
+WordPress.org). Without it the run skips the deploy and shows a warning. Icon, banner and screenshots for the plugin
+page go in `.wordpress-org/` and are published along with a release.
