@@ -1,4 +1,5 @@
 === Emmie Connector ===
+Contributors: emmieapp
 Tags: intake form, booking, care, healthcare, emmie
 Requires at least: 6.3
 Tested up to: 7.1
