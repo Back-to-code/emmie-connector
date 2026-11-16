@@ -49,7 +49,7 @@ docker compose -f docker-compose.test.yml down -v
 | `booking-form.php` | The booking form for introductory meetings |
 | `class-wp2emmie-data-encryption.php` | Encrypts the API token at rest with the site's own keys |
 | `functions.php` | The Emmie address, logging of failed HTTP calls and the privacy statement link |
-| `languages/` | Dutch translation |
+| `languages/` | Source of the Dutch translation, to import on translate.wordpress.org. Not shipped with the plugin |
 
 ## License
 
