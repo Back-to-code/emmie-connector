@@ -4,7 +4,7 @@ Tags: intake form, booking, care, healthcare, emmie
 Requires at least: 6.3
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,6 +100,9 @@ Only when you enter reCAPTCHA keys, the intake form uses Google reCAPTCHA agains
 Google reCAPTCHA is provided by Google: [terms of service](https://policies.google.com/terms), [privacy policy](https://policies.google.com/privacy).
 
 == Changelog ==
+
+= 1.4.1 =
+* Translations come from translate.wordpress.org instead of files in the plugin.
 
 = 1.4.0 =
 * The plugin is now called Emmie Connector, and comes from the WordPress.org plugin directory.
