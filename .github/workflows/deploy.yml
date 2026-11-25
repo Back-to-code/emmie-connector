@@ -2,9 +2,12 @@ name: Deploy to WordPress.org
 
 # A tag vX.Y.Z publishes that version to the plugin directory. Without the
 # SVN_PASSWORD secret the workflow skips the deploy and says so.
+# Run by hand, it is always a dry run: it shows what the next tag would put in
+# SVN, commits nothing and needs no secret.
 on:
   push:
     tags: ['v[0-9]+.[0-9]+.[0-9]+']
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -14,13 +17,17 @@ jobs:
     name: Publish to the plugin directory
     runs-on: ubuntu-latest
     env:
+      DRY_RUN: ${{ github.event_name == 'workflow_dispatch' }}
       SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
     steps:
       - name: Check that the SVN password is set
         id: secret
         run: |
-          if [ -z "$SVN_PASSWORD" ]; then
-            echo "::warning::SVN_PASSWORD is not set on this repository, so nothing was published. Set it after WordPress.org approves the plugin, then run this workflow again."
+          if [ "$DRY_RUN" = "true" ]; then
+            echo "Dry run: nothing is committed, so the password is not needed."
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          elif [ -z "$SVN_PASSWORD" ]; then
+            echo "::warning::SVN_PASSWORD is not set on this repository, so nothing was published. Set it, then run this workflow again."
             echo "present=false" >> "$GITHUB_OUTPUT"
           else
             echo "present=true" >> "$GITHUB_OUTPUT"
@@ -30,21 +37,32 @@ jobs:
         if: steps.secret.outputs.present == 'true'
 
       - name: Check that the tag matches Stable tag and the plugin header
+        id: version
         if: steps.secret.outputs.present == 'true'
         run: |
-          version="${GITHUB_REF_NAME#v}"
           stable=$(sed -n 's/^Stable tag:[[:space:]]*//p' readme.txt | tr -d '\r')
           header=$(sed -n 's/^[[:space:]*]*Version:[[:space:]]*//p' emmie-connector.php | head -1 | tr -d '\r')
+          if [ "$DRY_RUN" = "true" ]; then
+            version="$stable"
+          else
+            version="${GITHUB_REF_NAME#v}"
+          fi
           if [ "$stable" != "$version" ] || [ "$header" != "$version" ]; then
-            echo "::error::Tag $GITHUB_REF_NAME, Stable tag '$stable' and plugin header version '$header' must be the same."
+            echo "::error::Version '$version', Stable tag '$stable' and plugin header version '$header' must be the same."
             exit 1
           fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
 
       - name: Deploy to WordPress.org
         if: steps.secret.outputs.present == 'true'
         uses: 10up/action-wordpress-plugin-deploy@54bd289b8525fd23a5c365ec369185f2966529c2 # 2.3.0
+        with:
+          dry-run: ${{ env.DRY_RUN }}
         env:
           SVN_USERNAME: emmieapp
+          # The action refuses an empty password even in a dry run, where it never uses it.
+          SVN_PASSWORD: ${{ env.DRY_RUN == 'true' && 'not-used-in-a-dry-run' || secrets.SVN_PASSWORD }}
           SLUG: emmie-connector
+          VERSION: ${{ steps.version.outputs.version }}
           # Icon, banner and screenshots for the plugin page live here, outside the plugin itself.
           ASSETS_DIR: .wordpress-org

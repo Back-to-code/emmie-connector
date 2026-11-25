@@ -61,8 +61,11 @@ A tag publishes a version to the plugin directory of WordPress.org; nobody uses 
 
 1. Raise `Version` in the header of `emmie-connector.php` and `Stable tag` in `readme.txt` to the same number, and add
    the changes to the changelog in `readme.txt`.
-2. Merge that to `main`, then tag it: `git tag v1.4.1 && git push origin v1.4.1`.
-3. The workflow *Deploy to WordPress.org* checks that the tag, `Stable tag` and the header agree, and publishes.
+2. Merge that to `main`. To see what the tag will publish, run *Deploy to WordPress.org* by hand on `main`
+   (`gh workflow run deploy.yml --ref main`): run by hand it is always a dry run, which lists the files for SVN and
+   commits nothing.
+3. Tag it: `git tag v1.4.1 && git push origin v1.4.1`. The workflow checks that the tag, `Stable tag` and the header
+   agree, and publishes.
 
 The workflow publishes as `emmieapp` and needs the repository secret `SVN_PASSWORD` (the password of that account on
 WordPress.org). Without it the run skips the deploy and shows a warning. Icon, banner and screenshots for the plugin
