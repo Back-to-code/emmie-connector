@@ -79,7 +79,7 @@ In the WordPress database. When PHP has the OpenSSL extension, as nearly every h
 
 1. The settings page. Paste the API address and token from your Emmie; the plugin checks the token right away.
 2. The intake form on `/kennismaken`, filled in by a visitor.
-3. After sending, the visitor is a new client in your Emmie and can plan an introductory meeting.
+3. After sending, the form thanks the visitor and offers to plan an introductory meeting. The visitor is now a new client in your Emmie.
 
 == External services ==
 
