@@ -75,6 +75,12 @@ Turn on `WP_DEBUG` and `WP_DEBUG_LOG` in `wp-config.php`. The plugin then writes
 
 In the WordPress database. When PHP has the OpenSSL extension, as nearly every host has, it is encrypted with the keys from your `wp-config.php`.
 
+== Screenshots ==
+
+1. The settings page. Paste the API address and token from your Emmie; the plugin checks the token right away.
+2. The intake form on `/kennismaken`, filled in by a visitor.
+3. After sending, the visitor is a new client in your Emmie and can plan an introductory meeting.
+
 == External services ==
 
 This plugin connects your site to two external services. It contacts them only after you have entered their details on the settings page.
