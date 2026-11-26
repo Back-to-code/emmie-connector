@@ -240,7 +240,7 @@ msgid "Select contact preference"
 msgstr "Selecteer contactvoorkeur"
 
 #: form-handler.php:221
-msgid "Add contact person"
+msgid "Add a support worker or contact person"
 msgstr "Begeleider of contactpersoon toevoegen"
 
 #: form-handler.php:226
@@ -293,7 +293,7 @@ msgstr ""
 "Maximaal 40MB per bestand."
 
 #: form-handler.php:285
-msgid "Comments"
+msgid "Remarks"
 msgstr "Opmerkingen"
 
 #: form-handler.php:294

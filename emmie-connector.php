@@ -2,7 +2,7 @@
 /*
  * Plugin Name:       Emmie Connector
  * Description:       Connects your website to Emmie: an intake form that adds a new client to your Emmie, and Emmie's booking form for introductory meetings.
- * Version:           1.4.1
+ * Version:           1.4.2
  * Requires at least: 6.3
  * Requires PHP:      8.0
  * Author:            Emmie B.V.
@@ -14,7 +14,7 @@
 
 \defined('ABSPATH') || exit;
 
-\define('WP2EMMIE_VERSION', '1.4.1');
+\define('WP2EMMIE_VERSION', '1.4.2');
 \define('WP2EMMIE_PLUGIN_FILE', __FILE__);
 
 require_once plugin_dir_path(__FILE__) . 'functions.php';

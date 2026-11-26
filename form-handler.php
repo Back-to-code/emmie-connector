@@ -220,7 +220,7 @@ function wp2emmie_render_form(): string
             <p>
                 <label>
                     <input type="checkbox" id="wp2emmie-has-contact" name="has_contact_person" <?php checked($value('has_contact_person'), '1'); ?>>
-                    <?php esc_html_e('Add contact person', 'emmie-connector'); ?>
+                    <?php esc_html_e('Add a support worker or contact person', 'emmie-connector'); ?>
                 </label>
             </p>
             <div class="wp2emmie-contact-fields" id="wp2emmie-contact-fields">
@@ -284,7 +284,7 @@ function wp2emmie_render_form(): string
 
         <!-- Comment -->
         <p>
-            <label for="client_comment"><?php esc_html_e('Comments', 'emmie-connector'); ?></label><br>
+            <label for="client_comment"><?php esc_html_e('Remarks', 'emmie-connector'); ?></label><br>
             <textarea name="client_comment" rows="4" cols="50" class="<?php echo esc_attr($error_class('client_comment')); ?>"><?php echo esc_textarea($value('client_comment')); ?></textarea>
             <?php if (isset($errors['client_comment'])) { ?>
                 <span class="wp2emmie-error-text"><?php echo esc_html((string) $errors['client_comment']); ?></span>
