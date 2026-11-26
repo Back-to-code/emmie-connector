@@ -204,7 +204,7 @@ msgid "Select contact preference"
 msgstr ""
 
 #: form-handler.php:221
-msgid "Add contact person"
+msgid "Add a support worker or contact person"
 msgstr ""
 
 #: form-handler.php:226
@@ -252,7 +252,7 @@ msgid "Allowed formats: doc, docx, rtf, xls, xlsx, txt, jpg, jpeg, png, pdf. Max
 msgstr ""
 
 #: form-handler.php:285
-msgid "Comments"
+msgid "Remarks"
 msgstr ""
 
 #: form-handler.php:294
